@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1759828492496-1
+      author: Nilson
+      changes:
+        - createTable:
+            tableName: player
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_player
+              - column:
+                  name: puuid
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tag_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 1759828492496-2
+      author: Nilson
+      changes:
+        - addUniqueConstraint:
+            tableName: player
+            columnNames: puuid
+            constraintName: uc_player_puuid
+

@@ -46,3 +46,30 @@ databaseChangeLog:
             tableName: players
             columnNames: game_name, tag_name
             constraintName: uc_player_game_name_tag_name
+3  - changeSet:
+      id: 3
+      author: Nilson
+      changes:
+        - addColumn:
+            tableName: players
+            columns:
+              - column:
+                  name: competitive_tier
+                  type: INT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player_card
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player_title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_level
+                  type: INT
+                  constraints:
+                    nullable: true

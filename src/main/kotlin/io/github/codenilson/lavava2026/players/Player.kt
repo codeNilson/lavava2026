@@ -33,6 +33,12 @@ class Player (
     @Column(nullable = false)
     var tagName: String,
 
+    // TODO: Verify constraints after getting Riot API
+    var competitiveTier: Int? = null,
+    var playerCard: String? = null,
+    var playerTitle: String? = null,
+    var accountLevel: Int? = null,
+
     @LastModifiedDate
     @Column(nullable = false)
     var updatedAt: ZonedDateTime,

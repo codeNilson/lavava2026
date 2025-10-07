@@ -1,22 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: 1759828492496-1
+      id: 1
       author: Nilson
       changes:
         - createTable:
-            tableName: player
+            tableName: players
             columns:
               - column:
                   name: id
                   type: UUID
                   constraints:
-                    nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_player
+                    nullable: false
               - column:
                   name: puuid
                   type: VARCHAR(255)
                   constraints:
+                    unique: true
                     nullable: false
               - column:
                   name: game_name
@@ -28,12 +28,21 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
   - changeSet:
-      id: 1759828492496-2
+      id: 2
       author: Nilson
       changes:
         - addUniqueConstraint:
-            tableName: player
-            columnNames: puuid
-            constraintName: uc_player_puuid
-
+            tableName: players
+            columnNames: game_name, tag_name
+            constraintName: uc_player_game_name_tag_name

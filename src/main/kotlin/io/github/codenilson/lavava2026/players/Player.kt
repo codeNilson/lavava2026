@@ -6,6 +6,8 @@ import jakarta.persistence.EntityListeners
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -14,6 +16,9 @@ import java.util.UUID
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
+@Table(name = "players", uniqueConstraints = [
+    UniqueConstraint(columnNames = ["gameName", "tagName"])
+])
 class Player (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

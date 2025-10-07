@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Nilson
+      changes:
+        - createTable:
+            tableName: teams
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: won
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rounds_played
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rounds_won
+                  type: INT
+                  constraints:
+                    nullable: false
+

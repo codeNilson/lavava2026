@@ -1,4 +1,7 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changes/07-01-changelog.yaml
-
+      file: db/changelog/changes/10-01-changelog-players.yaml
+  - include:
+      file: db/changelog/changes/10-02-changelog-teams.yaml
+  - include:
+      file: db/changelog/changes/10-03-changelog-matches.yaml

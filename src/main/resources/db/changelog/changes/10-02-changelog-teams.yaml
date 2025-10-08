@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 07-02-changelog-teams
+      author: codenilson
+      changes:
+        - createTable:
+            tableName: teams
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: won
+                  type: boolean
+              - column:
+                  name: rounds_played
+                  type: int
+              - column:
+                  name: rounds_won
+                  type: int
+              - column:
+                  name: updated_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false

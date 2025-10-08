@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 07-03-changelog-matches
+      author: codenilson
+      changes:
+        - createTable:
+            tableName: matches
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: match_id
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false

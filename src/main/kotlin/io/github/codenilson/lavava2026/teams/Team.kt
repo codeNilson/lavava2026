@@ -25,7 +25,7 @@ class Team(
         var won: Boolean,
         var roundsPlayed: Int,
         var roundsWon: Int,
-        @OneToMany(mappedBy = "team") var performances: List<PlayerPerformance> = mutableListOf(),
+        @OneToMany(mappedBy = "team") var performances: MutableList<PlayerPerformance> = mutableListOf(),
         @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
         @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
 )

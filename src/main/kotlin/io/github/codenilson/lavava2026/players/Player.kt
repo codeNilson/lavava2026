@@ -33,7 +33,7 @@ class Player(
         var playerCard: String? = null,
         var playerTitle: String? = null,
         var accountLevel: Int? = null,
-        @OneToMany(mappedBy = "player") var performances: List<PlayerPerformance> = mutableListOf(),
+        @OneToMany(mappedBy = "player") var performances: MutableList<PlayerPerformance> = mutableListOf(),
         @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
         @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
 )

@@ -13,10 +13,27 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: match_id
+                  name: match_riot_id
                   type: varchar(255)
                   constraints:
                     unique: true
+                    nullable: false
+              - column:
+                  name: game_length
+                  type: int
+              - column:
+                  name: map
+                  type: varchar(255)
+              - column:
+                  name: game_start_millis
+                  type: bigint
+              - column:
+                  name: is_completed
+                  type: boolean
+              - column:
+                  name: season
+                  type: varchar(255)
+                  constraints:
                     nullable: false
               - column:
                   name: updated_at

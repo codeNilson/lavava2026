@@ -34,6 +34,7 @@ class PlayerPerformance(
         var deaths: Int,
         var assists: Int,
 
+
         // TODO: ADD COMPUTED KDA
 
         @ManyToOne @JoinColumn(name = "player_id") var player: Player,
@@ -41,4 +42,11 @@ class PlayerPerformance(
         @ManyToOne @JoinColumn(name = "team_id") var team: Team,
         @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
         @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
-)
+) {
+    val kda: Double
+        get() = if (deaths == 0) {
+            (kills + assists).toDouble()
+        } else {
+            kotlin.math.round((kills + assists).toDouble() / deaths * 100) / 100.0
+        }
+}

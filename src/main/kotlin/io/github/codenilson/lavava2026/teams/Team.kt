@@ -19,13 +19,20 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "teams")
 class Team(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        var id: UUID,
 
         // TODO: Maybe accept null and have a default value
         var won: Boolean,
         var roundsPlayed: Int,
         var roundsWon: Int,
-        @OneToMany(mappedBy = "team") var performances: MutableList<PlayerPerformance> = mutableListOf(),
-        @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
-        @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
+
+        @OneToMany(mappedBy = "team")
+        var performances: MutableList<PlayerPerformance> = mutableListOf(),
+
+        @LastModifiedDate @Column(nullable = false)
+        var updatedAt: ZonedDateTime,
+
+        @CreatedDate @Column(nullable = false, updatable = false)
+        var createdAt: ZonedDateTime
 )

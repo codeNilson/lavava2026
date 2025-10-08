@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/changes/10-02-changelog-teams.yaml
   - include:
       file: db/changelog/changes/10-03-changelog-matches.yaml
+  - include:
+      file: db/changelog/changes/10-04-changelog-player-performances.yaml

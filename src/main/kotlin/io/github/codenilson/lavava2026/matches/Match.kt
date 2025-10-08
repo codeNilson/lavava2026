@@ -19,15 +19,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Table(name = "matches")
 @EntityListeners(AuditingEntityListener::class)
 class Match(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
-        @Column(nullable = false, unique = true) var matchRiotId: String,
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+    @Column(nullable = false, unique = true) var matchRiotId: String,
         //TODO: Verify '?'
-        var gameLength: Int,
-        var map: String,
-        var gameStartMillis: Long,
-        var isCompleted: Boolean,
-        // customGameName,
-        @OneToMany(mappedBy = "match") var performances: MutableList<PlayerPerformance> = mutableListOf(),
-        @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
-        @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
+    var gameLength: Int,
+    var map: String,
+    var gameStartMillis: Long,
+    var isCompleted: Boolean,
+    // customGameName,
+    @Column(nullable = false) var season: String,
+    @OneToMany(mappedBy = "match") var performances: MutableList<PlayerPerformance> = mutableListOf(),
+    @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
+    @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
 )

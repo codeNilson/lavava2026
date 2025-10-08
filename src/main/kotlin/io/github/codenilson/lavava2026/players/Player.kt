@@ -24,16 +24,29 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 )
 class Player(
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
-        @Column(nullable = false, unique = true) var puuid: String,
-        @Column(nullable = false) var gameName: String,
-        @Column(nullable = false) var tagName: String,
+
+        @Column(nullable = false, unique = true)
+        var puuid: String,
+
+        @Column(nullable = false)
+        var gameName: String,
+
+        @Column(nullable = false)
+        var tagName: String,
+
 
         // TODO: Verify constraints after getting Riot API
         var competitiveTier: Int? = null,
         var playerCard: String? = null,
         var playerTitle: String? = null,
         var accountLevel: Int? = null,
-        @OneToMany(mappedBy = "player") var performances: MutableList<PlayerPerformance> = mutableListOf(),
-        @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
-        @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
+
+        @OneToMany(mappedBy = "player")
+        var performances: MutableList<PlayerPerformance> = mutableListOf(),
+
+        @LastModifiedDate @Column(nullable = false)
+        var updatedAt: ZonedDateTime,
+
+        @CreatedDate @Column(nullable = false, updatable = false)
+        var createdAt: ZonedDateTime
 )

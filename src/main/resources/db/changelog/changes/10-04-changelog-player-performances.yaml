@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 07-04-changelog-player-performances
+      id: 10-04-changelog-player-performances
       author: codenilson
       changes:
         - createTable:
@@ -15,18 +15,28 @@ databaseChangeLog:
               - column:
                   name: score
                   type: int
+                  constraints:
+                    nullable: false
               - column:
                   name: rounds_played
                   type: int
+                  constraints:
+                    nullable: false
               - column:
                   name: kills
                   type: int
+                  constraints:
+                    nullable: false
               - column:
                   name: deaths
                   type: int
+                  constraints:
+                    nullable: false
               - column:
                   name: assists
                   type: int
+                  constraints:
+                    nullable: false
               - column:
                   name: player_id
                   type: UUID
@@ -74,4 +84,3 @@ databaseChangeLog:
             tableName: players_performances
             columnNames: player_id, match_id, team_id
             constraintName: uc_player_performance_player_match_team
-

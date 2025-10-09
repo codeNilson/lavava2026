@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 07-03-changelog-matches
+      id: 10-03-changelog-matches
       author: codenilson
       changes:
         - createTable:
@@ -21,15 +21,23 @@ databaseChangeLog:
               - column:
                   name: game_length
                   type: int
+                  constraints:
+                    nullable: true
               - column:
                   name: map
                   type: varchar(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: game_start_millis
                   type: bigint
+                  constraints:
+                    nullable: true
               - column:
                   name: is_completed
                   type: boolean
+                  constraints:
+                    nullable: true
               - column:
                   name: season
                   type: varchar(255)

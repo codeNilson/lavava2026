@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 07-01-changelog-players
+      id: 10-01-changelog-players
       author: codenilson
       changes:
         - createTable:
@@ -31,15 +31,23 @@ databaseChangeLog:
               - column:
                   name: competitive_tier
                   type: int
+                  constraints:
+                    nullable: true
               - column:
                   name: player_card
                   type: varchar(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: player_title
                   type: varchar(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: account_level
                   type: int
+                  constraints:
+                    nullable: true
               - column:
                   name: updated_at
                   type: timestamptz

@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10-05-changelog-rounds
+      author: codenilson
+      changes:
+        - createTable:
+            tableName: rounds
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: round_number
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: match_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bomb_planter_id
+                  type: UUID
+                  constraints:
+                    nullable: true
+              - column:
+                  name: bomb_defuser_id
+                  type: UUID
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: rounds
+            baseColumnNames: match_id
+            referencedTableName: matches
+            referencedColumnNames: id
+            constraintName: fk_rounds_match
+        - addForeignKeyConstraint:
+            baseTableName: rounds
+            baseColumnNames: bomb_planter_id
+            referencedTableName: players
+            referencedColumnNames: id
+            constraintName: fk_rounds_bomb_planter
+        - addForeignKeyConstraint:
+            baseTableName: rounds
+            baseColumnNames: bomb_defuser_id
+            referencedTableName: players
+            referencedColumnNames: id
+            constraintName: fk_rounds_bomb_defuser

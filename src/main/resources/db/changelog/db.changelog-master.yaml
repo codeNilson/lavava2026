@@ -7,3 +7,7 @@ databaseChangeLog:
       file: db/changelog/changes/10-03-changelog-matches.yaml
   - include:
       file: db/changelog/changes/10-04-changelog-player-performances.yaml
+  - include:
+      file: db/changelog/changes/10-05-changelog-rounds.yaml
+  - include:
+      file: db/changelog/changes/10-06-changelog-round-kills.yaml

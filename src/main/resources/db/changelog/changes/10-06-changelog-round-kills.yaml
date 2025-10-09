@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10-06-changelog-round-kills
+      author: codenilson
+      changes:
+        - createTable:
+            tableName: round_kills
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: round_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: killer_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: victim_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: round_kills
+            baseColumnNames: round_id
+            referencedTableName: rounds
+            referencedColumnNames: id
+            constraintName: fk_round_kills_round
+        - addForeignKeyConstraint:
+            baseTableName: round_kills
+            baseColumnNames: killer_id
+            referencedTableName: players
+            referencedColumnNames: id
+            constraintName: fk_round_kills_killer
+        - addForeignKeyConstraint:
+            baseTableName: round_kills
+            baseColumnNames: victim_id
+            referencedTableName: players
+            referencedColumnNames: id
+            constraintName: fk_round_kills_victim
+

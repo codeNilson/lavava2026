@@ -6,12 +6,14 @@ import jakarta.persistence.Id
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 import jakarta.persistence.JoinColumn
 
 import java.util.UUID
 
 import io.github.codenilson.lavava2026.players.Player
 import io.github.codenilson.lavava2026.matches.Match
+import org.hibernate.mapping.OneToMany
 
 @Entity
 @Table(name = "round_results")
@@ -33,6 +35,9 @@ class RoundResult (
     @ManyToOne
     @JoinColumn(name = "bomb_defuser_player_id")
     var bombDefuser: Player? = null,
+
+    @OneToMany(mappedBy = "roundResult")
+    val roundKills: MutableList<RoundKills> = mutableListOf(),
 
     // var roundResultCode?
 )

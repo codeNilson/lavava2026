@@ -16,11 +16,11 @@ import io.github.codenilson.lavava2026.matches.Match
 import org.hibernate.mapping.OneToMany
 
 @Entity
-@Table(name = "round_results")
-class RoundResult (
+@Table(name = "rounds")
+class Round (
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
 
-    var roundNum: Int,
+    var roundNumber: Int,
     //var roundResult: String,
     //var winningTeam: String,
 
@@ -29,15 +29,15 @@ class RoundResult (
     var match: Match,
 
     @ManyToOne
-    @JoinColumn(name = "bomb_planter_player_id")
+    @JoinColumn(name = "bomb_planter_puuid") //TODO: PUUID
     var bombPlanter: Player? = null,
 
     @ManyToOne
-    @JoinColumn(name = "bomb_defuser_player_id")
+    @JoinColumn(name = "bomb_defuser_puuid")
     var bombDefuser: Player? = null,
 
     @OneToMany(mappedBy = "roundResult")
-    val roundKills: MutableList<RoundKills> = mutableListOf(),
+    val kills: MutableList<RoundKill> = mutableListOf(),
 
     // var roundResultCode?
 )

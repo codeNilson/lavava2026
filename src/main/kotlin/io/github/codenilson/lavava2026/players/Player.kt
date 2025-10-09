@@ -28,10 +28,10 @@ class Player(
         @Column(nullable = false, unique = true)
         var puuid: String,
 
-        @Column(nullable = false)
+        @Column(name = "game_name", nullable = false)
         var gameName: String,
 
-        @Column(nullable = false)
+        @Column(name = "tag_name", nullable = false)
         var tagName: String,
 
 

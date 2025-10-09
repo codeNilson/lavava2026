@@ -1,7 +1,7 @@
 package io.github.codenilson.lavava2026.rounds
 
 import io.github.codenilson.lavava2026.players.Player
-import io.github.codenilson.lavava2026.rounds.RoundResult
+import io.github.codenilson.lavava2026.rounds.Round
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -15,11 +15,11 @@ import java.util.UUID
 
 @Entity
 @Table(name = "round_kills")
-class RoundKills(
+class RoundKill(
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
 
         @ManyToOne @JoinColumn(name = "round_id")
-        var roundResult: RoundResult,
+        var round: Round,
 
         //TODO: id vs PUUID
         @ManyToOne @JoinColumn(name = "killer_id")

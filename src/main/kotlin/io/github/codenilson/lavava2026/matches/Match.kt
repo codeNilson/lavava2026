@@ -29,8 +29,8 @@ class Match(
     var isCompleted: Boolean,
     // customGameName,
     @Column(nullable = false) var season: String,
-    @OneToMany(mappedBy = "match") var performances: MutableList<PlayerPerformance> = mutableListOf(),
-    @OneToMany(mappedBy = "match") var roundResults: MutableList<RoundResult> = mutableListOf(),
+    @OneToMany(mappedBy = "match") val performances: MutableList<PlayerPerformance> = mutableListOf(),
+    @OneToMany(mappedBy = "match") val roundResults: MutableList<RoundResult> = mutableListOf(),
     @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
     @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
 )

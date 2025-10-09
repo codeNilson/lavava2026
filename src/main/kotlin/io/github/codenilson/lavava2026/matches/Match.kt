@@ -30,7 +30,7 @@ class Match(
     // customGameName,
     @Column(nullable = false) var season: String,
     @OneToMany(mappedBy = "match") val performances: MutableList<PlayerPerformance> = mutableListOf(),
-    @OneToMany(mappedBy = "match") val roundResults: MutableList<Round> = mutableListOf(),
+    @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
     @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
     @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
 )

@@ -28,11 +28,11 @@ class Round (
     var match: Match,
 
     @ManyToOne
-    @JoinColumn(name = "bomb_planter_puuid") //TODO: PUUID
+    @JoinColumn(name = "bomb_planter_id") //TODO: PUUID
     var bombPlanter: Player? = null,
 
     @ManyToOne
-    @JoinColumn(name = "bomb_defuser_puuid")
+    @JoinColumn(name = "bomb_defuser_id")
     var bombDefuser: Player? = null,
 
     @OneToMany(mappedBy = "round")

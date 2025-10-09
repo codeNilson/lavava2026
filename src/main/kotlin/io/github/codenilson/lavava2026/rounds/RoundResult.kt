@@ -17,11 +17,10 @@ import io.github.codenilson.lavava2026.matches.Match
 @Table(name = "round_results")
 class RoundResult (
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+
     var roundNum: Int,
-
-    // var roundResult: String,
-
-    // var winningTeam: String,
+    //var roundResult: String,
+    //var winningTeam: String,
 
     @ManyToOne
     @JoinColumn(name = "match_id")

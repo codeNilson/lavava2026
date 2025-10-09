@@ -1,6 +1,7 @@
 package io.github.codenilson.lavava2026.matches
 
 import io.github.codenilson.lavava2026.playersPerformances.PlayerPerformance
+import io.github.codenilson.lavava2026.rounds.RoundResult
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
@@ -29,6 +30,7 @@ class Match(
     // customGameName,
     @Column(nullable = false) var season: String,
     @OneToMany(mappedBy = "match") var performances: MutableList<PlayerPerformance> = mutableListOf(),
+    @OneToMany(mappedBy = "match") var roundResults: MutableList<RoundResult> = mutableListOf(),
     @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
     @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
 )

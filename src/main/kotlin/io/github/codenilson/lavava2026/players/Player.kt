@@ -41,6 +41,8 @@ class Player(
         var playerTitle: String? = null,
         var accountLevel: Int? = null,
 
+        var active: Boolean = true,
+
         @OneToMany(mappedBy = "player")
         var performances: MutableList<PlayerPerformance> = mutableListOf(),
 

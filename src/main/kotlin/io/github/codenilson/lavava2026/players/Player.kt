@@ -10,11 +10,11 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
-import java.time.ZonedDateTime
 import java.util.UUID
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.time.LocalDateTime
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
@@ -23,7 +23,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
         uniqueConstraints = [UniqueConstraint(columnNames = ["game_name", "tag_name"])]
 )
 class Player(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
 
         @Column(nullable = false, unique = true)
         var puuid: String,
@@ -47,8 +47,8 @@ class Player(
         var performances: MutableList<PlayerPerformance> = mutableListOf(),
 
         @LastModifiedDate @Column(nullable = false)
-        var updatedAt: ZonedDateTime,
+        var updatedAt: LocalDateTime? = null,
 
         @CreatedDate @Column(nullable = false, updatable = false)
-        var createdAt: ZonedDateTime
+        var createdAt: LocalDateTime? = null
 )

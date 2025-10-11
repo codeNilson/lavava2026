@@ -15,6 +15,7 @@ import java.util.UUID
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "matches")
@@ -31,6 +32,6 @@ class Match(
     @Column(nullable = false) var season: String,
     @OneToMany(mappedBy = "match") val performances: MutableList<PlayerPerformance> = mutableListOf(),
     @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
-    @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
-    @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
+    @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,
+    @CreatedDate @Column(nullable = false, updatable = false) var createdAt: LocalDateTime? = null,
 )

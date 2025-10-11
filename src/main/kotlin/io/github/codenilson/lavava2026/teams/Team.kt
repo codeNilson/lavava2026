@@ -14,6 +14,8 @@ import java.util.UUID
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
@@ -31,8 +33,8 @@ class Team(
         var performances: MutableList<PlayerPerformance> = mutableListOf(),
 
         @LastModifiedDate @Column(nullable = false)
-        var updatedAt: ZonedDateTime,
+        var updatedAt: LocalDateTime? = null,
 
         @CreatedDate @Column(nullable = false, updatable = false)
-        var createdAt: ZonedDateTime
+        var createdAt: LocalDateTime? = null,
 )

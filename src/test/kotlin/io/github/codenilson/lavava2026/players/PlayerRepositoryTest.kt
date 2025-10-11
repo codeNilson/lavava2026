@@ -7,7 +7,7 @@ import org.springframework.test.context.ActiveProfiles
 import kotlin.test.assertEquals
 
 @DataJpaTest
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 class PlayerRepositoryTest
     @Autowired
     constructor(private val repository: PlayerRepository)

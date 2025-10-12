@@ -22,7 +22,7 @@ class PlayerServiceTest {
     private lateinit var playerService: PlayerService
 
     @Test
-    fun `findAll should return all players as DTOs`() {
+    fun `findAll with null should return all players as DTOs`() {
         // Given
         val player1 = createTestPlayer(
             id = UUID.randomUUID(),
@@ -31,7 +31,6 @@ class PlayerServiceTest {
             tagName = "1234",
             active = true
         )
-
         val player2 = createTestPlayer(
             id = UUID.randomUUID(),
             puuid = "puuid2",
@@ -39,12 +38,11 @@ class PlayerServiceTest {
             tagName = "5678",
             active = false
         )
-
         val players = listOf(player1, player2)
         `when`(playerRepository.findAll()).thenReturn(players)
 
         // When
-        val result = playerService.findAll()
+        val result = playerService.findAll(null)
 
         // Then
         assertEquals(2, result.size)
@@ -54,23 +52,23 @@ class PlayerServiceTest {
         assertEquals("Player2", result[1].gameName)
         assertEquals("5678", result[1].tagName)
         assertEquals(false, result[1].active)
-
     }
 
     @Test
-    fun `findAll should return empty list when no players exist`() {
+    fun `findAll with null should return empty list when no players exist`() {
         // Given
         `when`(playerRepository.findAll()).thenReturn(emptyList())
 
         // When
-        val result = playerService.findAll()
+        val result = playerService.findAll(null)
 
         // Then
         assertEquals(0, result.size)
     }
 
+
     @Test
-    fun `findActivePlayers should return only active players as DTOs`() {
+    fun `findAll with active true should return only active players as DTOs`() {
         // Given
         val activePlayer1 = createTestPlayer(
             id = UUID.randomUUID(),
@@ -79,7 +77,6 @@ class PlayerServiceTest {
             tagName = "1111",
             active = true
         )
-
         val activePlayer2 = createTestPlayer(
             id = UUID.randomUUID(),
             puuid = "active-puuid2",
@@ -87,56 +84,69 @@ class PlayerServiceTest {
             tagName = "2222",
             active = true
         )
-
         val activePlayers = listOf(activePlayer1, activePlayer2)
         `when`(playerRepository.findByActiveTrue()).thenReturn(activePlayers)
 
         // When
-        val result = playerService.findActivePlayers()
+        val result = playerService.findAll(true)
 
         // Then
         assertEquals(2, result.size)
-        assertEquals("ActivePlayer1", result[0].gameName)
-        assertEquals("1111", result[0].tagName)
         assertEquals(true, result[0].active)
-        assertEquals("ActivePlayer2", result[1].gameName)
-        assertEquals("2222", result[1].tagName)
         assertEquals(true, result[1].active)
     }
 
     @Test
-    fun `findActivePlayers should return empty list when no active players exist`() {
+    fun `findAll with active false should return only inactive players as DTOs`() {
+        // Given
+        val inactivePlayer1 = createTestPlayer(
+            id = UUID.randomUUID(),
+            puuid = "inactive-puuid1",
+            gameName = "InactivePlayer1",
+            tagName = "3333",
+            active = false
+        )
+        val inactivePlayer2 = createTestPlayer(
+            id = UUID.randomUUID(),
+            puuid = "inactive-puuid2",
+            gameName = "InactivePlayer2",
+            tagName = "4444",
+            active = false
+        )
+        val inactivePlayers = listOf(inactivePlayer1, inactivePlayer2)
+        `when`(playerRepository.findByActiveFalse()).thenReturn(inactivePlayers)
+
+        // When
+        val result = playerService.findAll(false)
+
+        // Then
+        assertEquals(2, result.size)
+        assertEquals(false, result[0].active)
+        assertEquals(false, result[1].active)
+    }
+
+    @Test
+    fun `findAll with active true should return empty list when no active players exist`() {
         // Given
         `when`(playerRepository.findByActiveTrue()).thenReturn(emptyList())
 
         // When
-        val result = playerService.findActivePlayers()
+        val result = playerService.findAll(true)
 
         // Then
         assertEquals(0, result.size)
     }
 
     @Test
-    fun `findActivePlayers should handle single active player`() {
+    fun `findAll with active false should return empty list when no inactive players exist`() {
         // Given
-        val activePlayer = createTestPlayer(
-            id = UUID.randomUUID(),
-            puuid = "single-active-puuid",
-            gameName = "SingleActivePlayer",
-            tagName = "9999",
-            active = true
-        )
-
-        `when`(playerRepository.findByActiveTrue()).thenReturn(listOf(activePlayer))
+        `when`(playerRepository.findByActiveFalse()).thenReturn(emptyList())
 
         // When
-        val result = playerService.findActivePlayers()
+        val result = playerService.findAll(false)
 
         // Then
-        assertEquals(1, result.size)
-        assertEquals("SingleActivePlayer", result[0].gameName)
-        assertEquals("9999", result[0].tagName)
-        assertEquals(true, result[0].active)
+        assertEquals(0, result.size)
     }
 
     private fun createTestPlayer(

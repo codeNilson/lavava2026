@@ -7,4 +7,5 @@ import java.util.UUID
 @Repository
 interface PlayerRepository: JpaRepository<Player, UUID> {
     fun findByActiveTrue(): List<Player>
+    fun findByActiveFalse(): List<Player>
 }

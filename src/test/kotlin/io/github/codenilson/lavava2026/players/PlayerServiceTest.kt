@@ -42,7 +42,7 @@ class PlayerServiceTest {
         `when`(playerRepository.findAll()).thenReturn(players)
 
         // When
-        val result = playerService.findAll(null)
+        val result = playerService.findAll()
 
         // Then
         assertEquals(2, result.size)
@@ -60,7 +60,7 @@ class PlayerServiceTest {
         `when`(playerRepository.findAll()).thenReturn(emptyList())
 
         // When
-        val result = playerService.findAll(null)
+        val result = playerService.findAll()
 
         // Then
         assertEquals(0, result.size)

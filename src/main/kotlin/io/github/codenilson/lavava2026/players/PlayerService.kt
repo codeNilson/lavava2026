@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 class PlayerService (
     private val playerRepository: PlayerRepository
 ) {
-    fun findAll(active: Boolean?): List<PlayerResponseDTO> {
+    fun findAll(active: Boolean? = null): List<PlayerResponseDTO> {
         val players = when (active) {
             true -> playerRepository.findByActiveTrue()
             false -> playerRepository.findByActiveFalse()

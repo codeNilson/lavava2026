@@ -3,6 +3,7 @@ package io.github.codenilson.lavava2026.players
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.data.domain.Sort
 import org.springframework.test.context.ActiveProfiles
 import kotlin.test.assertEquals
 
@@ -41,7 +42,7 @@ class PlayerRepositoryTest
         repository.saveAll(listOf(activePlayer, inactivePlayer))
 
         // When
-        val activePlayers = repository.findByActiveTrue()
+        val activePlayers = repository.findByActive(active = true, Sort.by(Sort.Direction.DESC, "playerCard"))
 
         // Then
         assertEquals(1, activePlayers.size)

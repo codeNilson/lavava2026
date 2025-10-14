@@ -1,6 +1,6 @@
-package io.github.codenilson.lavava2026.players.dto
+package io.github.codenilson.lavava2026.domain.players.dto
 
-import io.github.codenilson.lavava2026.players.Player
+import io.github.codenilson.lavava2026.domain.players.Player
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 import java.util.UUID

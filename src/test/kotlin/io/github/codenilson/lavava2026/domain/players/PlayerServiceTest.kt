@@ -1,5 +1,6 @@
-package io.github.codenilson.lavava2026.players
+package io.github.codenilson.lavava2026.domain.players
 
+import io.github.codenilson.lavava2026.application.services.PlayerService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks

@@ -1,6 +1,6 @@
-package io.github.codenilson.lavava2026.players
+package io.github.codenilson.lavava2026.domain.players
 
-import io.github.codenilson.lavava2026.playersPerformances.PlayerPerformance
+import io.github.codenilson.lavava2026.domain.playersPerformances.PlayerPerformance
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners

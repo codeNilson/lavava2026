@@ -1,4 +1,4 @@
-package io.github.codenilson.lavava2026.players
+package io.github.codenilson.lavava2026.domain.players
 
 import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.repository.JpaRepository

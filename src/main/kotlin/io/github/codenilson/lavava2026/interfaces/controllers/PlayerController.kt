@@ -1,6 +1,7 @@
-package io.github.codenilson.lavava2026.players
+package io.github.codenilson.lavava2026.interfaces.controllers
 
-import io.github.codenilson.lavava2026.players.dto.PlayerResponseDTO
+import io.github.codenilson.lavava2026.application.services.PlayerService
+import io.github.codenilson.lavava2026.domain.players.dto.PlayerResponseDTO
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content

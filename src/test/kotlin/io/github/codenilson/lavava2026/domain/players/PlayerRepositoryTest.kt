@@ -1,4 +1,4 @@
-package io.github.codenilson.lavava2026.players
+package io.github.codenilson.lavava2026.domain.players
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

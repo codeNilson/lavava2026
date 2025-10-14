@@ -1,7 +1,7 @@
-package io.github.codenilson.lavava2026.rounds
+package io.github.codenilson.lavava2026.domain.rounds
 
-import io.github.codenilson.lavava2026.players.Player
-import io.github.codenilson.lavava2026.matches.Match
+import io.github.codenilson.lavava2026.domain.players.Player
+import io.github.codenilson.lavava2026.domain.matches.Match
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Table

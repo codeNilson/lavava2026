@@ -1,7 +1,7 @@
-package io.github.codenilson.lavava2026.matches
+package io.github.codenilson.lavava2026.domain.matches
 
-import io.github.codenilson.lavava2026.playersPerformances.PlayerPerformance
-import io.github.codenilson.lavava2026.rounds.Round
+import io.github.codenilson.lavava2026.domain.playersPerformances.PlayerPerformance
+import io.github.codenilson.lavava2026.domain.rounds.Round
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
-import java.time.ZonedDateTime
 import java.util.UUID
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate

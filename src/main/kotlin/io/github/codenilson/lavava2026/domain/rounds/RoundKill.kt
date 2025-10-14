@@ -1,7 +1,6 @@
-package io.github.codenilson.lavava2026.rounds
+package io.github.codenilson.lavava2026.domain.rounds
 
-import io.github.codenilson.lavava2026.players.Player
-import io.github.codenilson.lavava2026.rounds.Round
+import io.github.codenilson.lavava2026.domain.players.Player
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

@@ -1,6 +1,7 @@
-package io.github.codenilson.lavava2026.players
+package io.github.codenilson.lavava2026.application.services
 
-import io.github.codenilson.lavava2026.players.dto.PlayerResponseDTO
+import io.github.codenilson.lavava2026.domain.players.PlayerRepository
+import io.github.codenilson.lavava2026.domain.players.dto.PlayerResponseDTO
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
@@ -14,7 +15,7 @@ class PlayerService(
         } else {
             playerRepository.findByActive(active, sort)
         }
-    
+
         return players.map(::PlayerResponseDTO)
     }
 }

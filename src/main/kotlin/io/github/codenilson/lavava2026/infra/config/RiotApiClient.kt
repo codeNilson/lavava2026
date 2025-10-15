@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
-class RiotApiClient(@Value("\${api.base_url}") private val baseUrl: String) {
+class RiotApiClient(@param:Value("\${api.base_url}") private val baseUrl: String) {
     @Bean
     fun webClient(builder: WebClient.Builder): WebClient {
         return builder

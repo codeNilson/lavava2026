@@ -1,6 +1,6 @@
 package io.github.codenilson.lavava2026.application.services
 
-import io.github.codenilson.lavava2026.infra.config.ValorantMatchDTO
+import io.github.codenilson.lavava2026.infra.config.dto.valorant.ValorantMatchDTO
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono

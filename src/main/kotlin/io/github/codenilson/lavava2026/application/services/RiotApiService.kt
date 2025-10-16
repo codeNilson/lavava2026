@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono
 @Service
 class RiotApiService(private val webClient: WebClient) {
     fun fetchMatch(matchId: String): Mono<ValorantMatchDTO> {
-        return webClient
+        val response =  webClient
                 .get()
                 .uri("/lol/match/v5/matches/$matchId")
                 .retrieve()

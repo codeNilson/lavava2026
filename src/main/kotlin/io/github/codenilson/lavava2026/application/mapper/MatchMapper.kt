@@ -8,19 +8,13 @@ import org.springframework.stereotype.Component
 class MatchMapper {
 
     fun fromValorantMatch(valorantMatch: ValorantMatchDTO) : Match {
-        val match = Match(
+        return Match(
             matchRiotId = valorantMatch.matchInfo.matchId,
-            mapId = valorantMatch.matchInfo.mapId,
-            gameVersion = valorantMatch.matchInfo.gameVersion,
-            region = valorantMatch.matchInfo.region,
-            gameLengthMillis = valorantMatch.matchInfo.gameLengthMillis,
-            provisioningFlowId = valorantMatch.matchInfo.provisioningFlowId,
+            gameLength = valorantMatch.matchInfo.gameLengthMillis,
+            map = valorantMatch.matchInfo.mapId,
             gameStartMillis = valorantMatch.matchInfo.gameStartMillis,
             isCompleted = valorantMatch.matchInfo.isCompleted,
-            customGameName = valorantMatch.matchInfo.customGameName,
-            gameMode = valorantMatch.matchInfo.gameMode,
-            isRanked = valorantMatch.matchInfo.isRanked,
-            seasonId = valorantMatch.matchInfo.seasonId
+            season = "2026", // todo: verify how to get the season
         )
     }
 }

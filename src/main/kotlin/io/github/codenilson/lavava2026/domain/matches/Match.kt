@@ -20,9 +20,9 @@ import java.time.LocalDateTime
 @Table(name = "matches")
 @EntityListeners(AuditingEntityListener::class)
 class Match(
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
     @Column(nullable = false, unique = true) var matchRiotId: String,
-        //TODO: Verify '?'
+    //TODO: Verify '?'
     var gameLength: Int,
     var map: String,
     var gameStartMillis: Long,

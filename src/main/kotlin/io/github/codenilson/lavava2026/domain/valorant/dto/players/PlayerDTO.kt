@@ -1,4 +1,4 @@
-package io.github.codenilson.lavava2026.infra.config.dto.valorant.players
+package io.github.codenilson.lavava2026.domain.valorant.dto.players
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 

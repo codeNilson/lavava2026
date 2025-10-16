@@ -1,7 +1,7 @@
-package io.github.codenilson.lavava2026.infra.config.dto.valorant.rounds
+package io.github.codenilson.lavava2026.domain.valorant.dto.rounds
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import io.github.codenilson.lavava2026.infra.config.dto.valorant.players.PlayerRoundStatsDto
+import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerRoundStatsDto
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class RoundResultDto(

@@ -1,9 +1,9 @@
-package io.github.codenilson.lavava2026.infra.config.dto.valorant
+package io.github.codenilson.lavava2026.domain.valorant.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import io.github.codenilson.lavava2026.infra.config.dto.valorant.players.PlayersDto
-import io.github.codenilson.lavava2026.infra.config.dto.valorant.teams.TeamDto
-import io.github.codenilson.lavava2026.infra.config.dto.valorant.rounds.RoundResultDto
+import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayersDto
+import io.github.codenilson.lavava2026.domain.valorant.dto.teams.TeamDto
+import io.github.codenilson.lavava2026.domain.valorant.dto.rounds.RoundResultDto
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ValorantMatchDTO(

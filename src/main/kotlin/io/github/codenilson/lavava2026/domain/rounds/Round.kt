@@ -17,9 +17,10 @@ import java.util.UUID
 @Entity
 @Table(name = "rounds")
 class Round (
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
 
     var roundNumber: Int,
+    //TODO: VERIFY
     //var roundResult: String,
     //var winningTeam: String,
 

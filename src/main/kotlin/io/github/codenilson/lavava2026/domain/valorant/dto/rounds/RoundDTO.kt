@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerRoundStatsDto
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class RoundResultDto(
+data class RoundResultDTO(
     val roundNum: Int,
     val roundResult: String,
     val roundCeremony: String,

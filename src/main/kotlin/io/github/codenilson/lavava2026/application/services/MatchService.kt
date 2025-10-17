@@ -14,7 +14,7 @@ class MatchService(
     @Transactional
     fun syncMatch(matchId: String) {
         val valorantMatch = riotApiService.fetchMatch(matchId).block()
-        val match = mapper.fromValorantMatch(valorantMatch!!)
+        val match = mapper.fromValorantMatch(valorantMatch!!.matchInfo)
 
     }
 }

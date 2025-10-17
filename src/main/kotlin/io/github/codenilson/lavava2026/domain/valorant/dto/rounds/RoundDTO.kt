@@ -5,7 +5,7 @@ import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerRoundSt
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class RoundResultDto(
-    val roundNum: Integer,
+    val roundNum: Int,
     val roundResult: String,
     val roundCeremony: String,
     val winningTeam: String,

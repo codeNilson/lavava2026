@@ -20,7 +20,9 @@ import java.time.LocalDateTime
 @Table(name = "teams")
 class Team(
         @Id @GeneratedValue(strategy = GenerationType.AUTO)
-        var id: UUID,
+        var id: UUID? = null,
+
+        var teamRiotId: String,
 
         // TODO: Maybe accept null and have a default value
         var won: Boolean,

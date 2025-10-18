@@ -12,7 +12,7 @@ class PerformanceMapper(
     private val playerService: PlayerService,
 ) {
     fun fromPlayerDTO(playersDTO: PlayerDTO): PlayerPerformance {
-        return PlayerPerformance(
+        val performance = PlayerPerformance(
             characterId = playersDTO.characterId,
             score = playersDTO.stats.score,
             roundsPlayed = playersDTO.stats.roundsPlayed,
@@ -22,5 +22,6 @@ class PerformanceMapper(
             player = playerService.findByPuuid(playersDTO.puuid),
             team = teamService.getTeamByRiotId(playersDTO.teamId),
         )
+        return performance
     }
 }

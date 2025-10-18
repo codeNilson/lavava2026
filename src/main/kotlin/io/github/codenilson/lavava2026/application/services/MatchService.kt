@@ -13,7 +13,8 @@ class MatchService(
     private val riotApiService: RiotApiService,
     private val matchMapper: MatchMapper,
     private val teamMapper: TeamMapper,
-    private val performanceMapper: PerformanceMapper
+    private val performanceMapper: PerformanceMapper,
+    private val roundMapper: RoundMapper,
 ) {
     @Transactional
     fun syncMatch(matchId: String) {
@@ -21,10 +22,16 @@ class MatchService(
             ?: throw IllegalStateException("Could not fetch match with id: $matchId")
 
         val match = matchMapper.fromValorantMatch(valorantMatch.matchInfo)
-        val (team1, team2) = valorantMatch.teams
+        val (team1, team2) = valorantMatch.teams.map(teamMapper::fromTeamDTO)
 
         val playersPerformances = valorantMatch.players.map { player ->
             performanceMapper.fromPlayerDTO(player).apply {
+                this.match = match
+            }
+        }
+
+        val rounds = valorantMatch.roundResults.map { roundResultDTO ->
+            roundMapper.fromRoundResultDTO(roundResultDTO).apply {
                 this.match = match
             }
         }

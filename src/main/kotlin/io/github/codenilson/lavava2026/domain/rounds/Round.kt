@@ -26,7 +26,7 @@ class Round (
 
     @ManyToOne
     @JoinColumn(name = "match_id")
-    var match: Match,
+    var match: Match? = null,
 
     @ManyToOne
     @JoinColumn(name = "bomb_planter_id") //TODO: PUUID

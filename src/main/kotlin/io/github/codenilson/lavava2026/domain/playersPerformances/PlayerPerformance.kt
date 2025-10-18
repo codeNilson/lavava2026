@@ -37,7 +37,7 @@ class PlayerPerformance(
         var assists: Int,
 
         @ManyToOne @JoinColumn(name = "player_id") var player: Player,
-        @ManyToOne @JoinColumn(name = "match_id") var match: Match,
+        @ManyToOne @JoinColumn(name = "match_id", nullable = false) var match: Match? = null,
         @ManyToOne @JoinColumn(name = "team_id") var team: Team,
         @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,
         @CreatedDate @Column(nullable = false, updatable = false) var createdAt: LocalDateTime? = null

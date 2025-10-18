@@ -1,14 +1,14 @@
 package io.github.codenilson.lavava2026.domain.valorant.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayersDto
+import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.rounds.RoundResultDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.teams.TeamDTO
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ValorantMatchDTO(
     val matchInfo: MatchInfoDto,
-    val players: List<PlayersDto>,
+    val players: List<PlayerDTO>,
     val teams: List<TeamDTO>,
     val roundResults: List<RoundResultDTO>
 )

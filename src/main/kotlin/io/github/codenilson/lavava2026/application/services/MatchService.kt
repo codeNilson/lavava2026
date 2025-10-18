@@ -12,6 +12,7 @@ class MatchService(
     private val riotApiService: RiotApiService,
     private val matchMapper: MatchMapper,
     private val teamMapper: TeamMapper,
+    private val performanceMapper: PerformanceMapper
 ) {
     @Transactional
     fun syncMatch(matchId: String) {
@@ -19,6 +20,10 @@ class MatchService(
         val match = matchMapper.fromValorantMatch(valorantMatch!!.matchInfo)
 
         val (team1, team2) = valorantMatch.teams
+
+        val playersPerformances = valorantMatch.players.map { player ->
+            performanceMapper.fromPlayerDTO(player)
+        }
 
     }
 }

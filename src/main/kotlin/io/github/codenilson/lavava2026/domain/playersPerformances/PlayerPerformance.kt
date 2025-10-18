@@ -17,6 +17,7 @@ import jakarta.persistence.UniqueConstraint
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import java.util.UUID
 
@@ -27,7 +28,8 @@ import java.util.UUID
         uniqueConstraints = [UniqueConstraint(columnNames = ["player_id", "match_id", "team_id"])]
 )
 class PlayerPerformance(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
+        var characterId: String,
         var score: Int,
         var roundsPlayed: Int,
         var kills: Int,
@@ -37,8 +39,8 @@ class PlayerPerformance(
         @ManyToOne @JoinColumn(name = "player_id") var player: Player,
         @ManyToOne @JoinColumn(name = "match_id") var match: Match,
         @ManyToOne @JoinColumn(name = "team_id") var team: Team,
-        @LastModifiedDate @Column(nullable = false) var updatedAt: ZonedDateTime,
-        @CreatedDate @Column(nullable = false, updatable = false) var createdAt: ZonedDateTime
+        @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,
+        @CreatedDate @Column(nullable = false, updatable = false) var createdAt: LocalDateTime? = null
 ) {
     val kda: Double
         get() = if (deaths == 0) {

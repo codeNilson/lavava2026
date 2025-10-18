@@ -3,7 +3,7 @@ package io.github.codenilson.lavava2026.domain.valorant.dto.players
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class PlayersDto(
+data class PlayerDTO(
     val puuid: String,
     val gameName: String,
     val tagLine: String,

@@ -1,5 +1,7 @@
 package io.github.codenilson.lavava2026.application.services
 
+import io.github.codenilson.lavava2026.application.exceptions.ResourceNotFoundException
+import io.github.codenilson.lavava2026.domain.players.Player
 import io.github.codenilson.lavava2026.domain.players.PlayerRepository
 import io.github.codenilson.lavava2026.domain.players.dto.PlayerResponseDTO
 import org.springframework.data.domain.Sort
@@ -17,5 +19,10 @@ class PlayerService(
         }
 
         return players.map(::PlayerResponseDTO)
+    }
+
+    fun findByPuuid(puuid: String) : Player { // TODO: change to players Response
+        val player = playerRepository.findByPuuid(puuid) ?: throw ResourceNotFoundException("Player with puuid $puuid not found")
+        return player
     }
 }

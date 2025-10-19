@@ -7,14 +7,14 @@ import io.github.codenilson.lavava2026.domain.valorant.dto.teams.TeamDTO
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ValorantMatchDTO(
-    val matchInfo: MatchInfoDto,
+    val matchInfo: MatchInfoDTO,
     val players: List<PlayerDTO>,
     val teams: List<TeamDTO>,
     val roundResults: List<RoundResultDTO>
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class MatchInfoDto(
+data class MatchInfoDTO(
     val matchId: String,
     val mapId: String,
     val gameVersion: String,

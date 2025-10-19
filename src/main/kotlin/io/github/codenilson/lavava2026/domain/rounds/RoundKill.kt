@@ -15,7 +15,7 @@ import java.util.UUID
 @Entity
 @Table(name = "round_kills")
 class RoundKill(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
 
         @ManyToOne @JoinColumn(name = "round_id")
         var round: Round,

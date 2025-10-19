@@ -4,6 +4,7 @@ import io.github.codenilson.lavava2026.application.mapper.MatchMapper
 import io.github.codenilson.lavava2026.application.mapper.PerformanceMapper
 import io.github.codenilson.lavava2026.application.mapper.TeamMapper
 import io.github.codenilson.lavava2026.domain.matches.MatchRepository
+import io.github.codenilson.lavava2026.domain.rounds.RoundKill
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,6 +16,7 @@ class MatchService(
     private val teamMapper: TeamMapper,
     private val performanceMapper: PerformanceMapper,
     private val roundMapper: RoundMapper,
+    private val playerService: PlayerService,
 ) {
     @Transactional
     fun syncMatch(matchId: String) {
@@ -33,6 +35,14 @@ class MatchService(
         val rounds = valorantMatch.roundResults.map { roundResultDTO ->
             roundMapper.fromRoundResultDTO(roundResultDTO).apply {
                 this.match = match
+                roundResultDTO.playerStats.forEach {
+                    playerStat -> playerStat.kills.forEach {
+                        kill -> RoundKill(
+                        round = this,
+                        killer = playerService.findByPuuid(kill.killer),
+                        victim = playerService.findByPuuid(kill.victim),
+                    )
+                }}
             }
         }
 

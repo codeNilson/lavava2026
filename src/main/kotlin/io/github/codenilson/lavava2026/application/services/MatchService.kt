@@ -1,51 +1,19 @@
 package io.github.codenilson.lavava2026.application.services
 
 import io.github.codenilson.lavava2026.application.mapper.MatchMapper
-import io.github.codenilson.lavava2026.application.mapper.PerformanceMapper
-import io.github.codenilson.lavava2026.application.mapper.TeamMapper
+import io.github.codenilson.lavava2026.domain.matches.Match
 import io.github.codenilson.lavava2026.domain.matches.MatchRepository
-import io.github.codenilson.lavava2026.domain.rounds.RoundKill
+import io.github.codenilson.lavava2026.domain.valorant.dto.ValorantMatchDTO
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class MatchService(
     private val matchRepository: MatchRepository,
-    private val riotApiService: RiotApiService,
     private val matchMapper: MatchMapper,
-    private val teamMapper: TeamMapper,
-    private val performanceMapper: PerformanceMapper,
-    private val roundMapper: RoundMapper,
-    private val playerService: PlayerService,
 ) {
-    @Transactional
-    fun syncMatch(matchId: String) {
-        val valorantMatch = riotApiService.fetchMatch(matchId).block()
-            ?: throw IllegalStateException("Could not fetch match with id: $matchId")
+    fun saveFromValorantMatch(valorantMatch: ValorantMatchDTO): Match {
 
         val match = matchMapper.fromValorantMatch(valorantMatch.matchInfo)
-        val (team1, team2) = valorantMatch.teams.map(teamMapper::fromTeamDTO)
-
-        val playersPerformances = valorantMatch.players.map { player ->
-            performanceMapper.fromPlayerDTO(player).apply {
-                this.match = match
-            }
-        }
-
-        val rounds = valorantMatch.roundResults.map { roundResultDTO ->
-            roundMapper.fromRoundResultDTO(roundResultDTO).apply {
-                this.match = match
-                roundResultDTO.playerStats.forEach {
-                    playerStat -> playerStat.kills.forEach {
-                        kill -> RoundKill(
-                        round = this,
-                        killer = playerService.findByPuuid(kill.killer),
-                        victim = playerService.findByPuuid(kill.victim),
-                    )
-                }}
-            }
-        }
-
-
+        return matchRepository.save(match)
     }
 }

@@ -47,10 +47,11 @@ class SyncMatch(
             val player = playersMap[playerDTO.puuid] ?: throw ResourceNotFoundException("Player not found for puuid: ${playerDTO.puuid}")
             val team = teamsMap[playerDTO.teamId] ?: throw ResourceNotFoundException("Team not found for riotId: ${playerDTO.teamId}")
 
-            playerPerformanceService.savefromValorantAPI(playerDTO, player, team).apply {
+            playerPerformanceService.createPerformanceFromDTO(playerDTO, player, team).apply {
                 this.match = savedMatch
             }
         }
+
         playerPerformanceService.saveAll(performances)
 
         val allKills = mutableListOf<RoundKill>()

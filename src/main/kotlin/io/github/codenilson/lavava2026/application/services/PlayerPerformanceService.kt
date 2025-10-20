@@ -25,4 +25,8 @@ class PlayerPerformanceService(
     fun saveAll(performances: List<PlayerPerformance>): List<PlayerPerformance> {
         return playerPerformanceRepository.saveAll(performances)
     }
+
+    fun createPerformanceFromDTO(playerDTO: PlayerDTO, player: Player, team: Team): PlayerPerformance {
+        return performanceMapper.fromPlayerDTO(playerDTO, player, team)
+    }
 }

@@ -6,6 +6,7 @@ import io.github.codenilson.lavava2026.application.services.MatchService
 import io.github.codenilson.lavava2026.application.services.PlayerService
 import io.github.codenilson.lavava2026.application.services.RiotApiService
 import io.github.codenilson.lavava2026.application.services.PlayerPerformanceService
+import io.github.codenilson.lavava2026.application.services.RoundKillService
 import io.github.codenilson.lavava2026.application.services.RoundService
 import io.github.codenilson.lavava2026.application.services.TeamService
 import io.github.codenilson.lavava2026.domain.rounds.RoundKill
@@ -19,7 +20,8 @@ class SyncMatch(
     private val matchService: MatchService,
     private val teamService: TeamService,
     private val playerPerformanceService: PlayerPerformanceService,
-    private val roundService: RoundService
+    private val roundService: RoundService,
+    private val roundKillService: RoundKillService
 ) {
     @Transactional
     fun syncMatch(matchId: String) {
@@ -51,19 +53,30 @@ class SyncMatch(
         }
         playerPerformanceService.saveAll(performances)
 
+        val allKills = mutableListOf<RoundKill>()
         val rounds = valorantMatch.roundResults.map { roundResultDTO ->
-            roundService.saveFromRoundStatusDTO(roundResultDTO).apply {
+            val round = roundService.createRoundFromDTO(roundResultDTO, playersMap).apply {
                 this.match = savedMatch
-                roundResultDTO.playerStats.forEach {
-                        playerStat -> playerStat.kills.forEach {
-                        kill -> RoundKill(
-                    round = this,
-                    killer = playerService.findByPuuid(kill.killer),
-                    victim = playerService.findByPuuid(kill.victim),
-                )
-                }}
             }
+
+            val killsInRound = roundResultDTO.playerStats.flatMap { playerStat ->
+                playerStat.kills.map { killDTO ->
+                    val killer = playersMap[killDTO.killer] ?: throw ResourceNotFoundException("Killer not found for puuid: ${killDTO.killer}")
+                    val victim = playersMap[killDTO.victim] ?: throw ResourceNotFoundException("Victim not found for puuid: ${killDTO.victim}")
+                    RoundKill(
+                        round = round,
+                        killer = killer,
+                        victim = victim
+                    )
+                }
+            }
+            allKills.addAll(killsInRound)
+            round
         }
+
+        // 5. Salvar todos os rounds e todas as mortes em lote
+        roundService.saveAll(rounds)
+        roundKillService.saveAll(allKills)
 
 
     }

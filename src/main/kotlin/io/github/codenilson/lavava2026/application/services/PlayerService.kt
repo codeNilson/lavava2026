@@ -25,4 +25,8 @@ class PlayerService(
         val player = playerRepository.findByPuuid(puuid) ?: throw ResourceNotFoundException("Player with puuid $puuid not found")
         return player
     }
+
+    fun findAllByPuuidIn(puuids: List<String>): List<Player> {
+        return playerRepository.findByPuuidIn(puuids)
+    }
 }

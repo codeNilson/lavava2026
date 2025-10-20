@@ -14,7 +14,7 @@ class MatchService(
 ) {
     fun saveFromValorantMatch(valorantMatch: ValorantMatchDTO): Match {
 
-        if (matchAlreadyExists(valorantMatch)) {
+        if (matchAlreadyExists(valorantMatch.matchInfo.matchId)) {
             throw ResourceAlreadyExists("Match with id ${valorantMatch.matchInfo.matchId} already exists")
         }
 
@@ -22,7 +22,7 @@ class MatchService(
         return matchRepository.save(match)
     }
 
-    private fun matchAlreadyExists(valorantMatch: ValorantMatchDTO): Boolean {
-        return matchRepository.existsByMatchRiotId(valorantMatch.matchInfo.matchId)
+    fun matchAlreadyExists(matchId: String): Boolean {
+        return matchRepository.existsByMatchRiotId(matchId)
     }
 }

@@ -26,4 +26,8 @@ class TeamService(
     fun save(team: Team): Team {
         return teamRepository.save(team)
     }
+
+    fun findAllByTeamRiotIdIn(teamRiotIds: List<String>): List<Team> {
+        return teamRepository.findByTeamRiotIdIn(teamRiotIds)
+    }
 }

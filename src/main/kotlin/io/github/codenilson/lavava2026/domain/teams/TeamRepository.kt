@@ -5,4 +5,5 @@ import java.util.UUID
 
 interface TeamRepository: JpaRepository<Team, UUID> {
     fun findTeamByTeamRiotId(riotId: String): Team?
+    fun findByTeamRiotIdIn(teamRiotIds: List<String>): List<Team>
 }

@@ -1,13 +1,13 @@
 package io.github.codenilson.lavava2026.application.mapper
 
 import io.github.codenilson.lavava2026.domain.matches.Match
-import io.github.codenilson.lavava2026.domain.valorant.dto.MatchInfoDto
+import io.github.codenilson.lavava2026.domain.valorant.dto.MatchInfoDTO
 import org.springframework.stereotype.Component
 
 @Component
 class MatchMapper {
 
-    fun fromValorantMatch(valorantMatchInfo: MatchInfoDto) : Match {
+    fun fromValorantMatch(valorantMatchInfo: MatchInfoDTO) : Match {
         return Match(
             matchRiotId = valorantMatchInfo.matchId,
             gameLength = valorantMatchInfo.gameLengthMillis,

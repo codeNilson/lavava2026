@@ -1,5 +1,6 @@
 package io.github.codenilson.lavava2026.application.services
 
+import io.github.codenilson.lavava2026.application.exceptions.ResourceAlreadyExists
 import io.github.codenilson.lavava2026.application.mapper.MatchMapper
 import io.github.codenilson.lavava2026.domain.matches.Match
 import io.github.codenilson.lavava2026.domain.matches.MatchRepository
@@ -13,7 +14,15 @@ class MatchService(
 ) {
     fun saveFromValorantMatch(valorantMatch: ValorantMatchDTO): Match {
 
+        if (matchAlreadyExists(valorantMatch)) {
+            throw ResourceAlreadyExists("Match with id ${valorantMatch.matchInfo.matchId} already exists")
+        }
+
         val match = matchMapper.fromValorantMatch(valorantMatch.matchInfo)
         return matchRepository.save(match)
+    }
+
+    private fun matchAlreadyExists(valorantMatch: ValorantMatchDTO): Boolean {
+        return matchRepository.existsByMatchRiotId(valorantMatch.matchInfo.matchId)
     }
 }

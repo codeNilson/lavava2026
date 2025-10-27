@@ -13,10 +13,6 @@ class PlayerPerformanceService(
     private val playerPerformanceRepository: PlayerPerformanceRepository,
     private val performanceMapper: PerformanceMapper,
 ) {
-    fun savefromValorantAPI(playerDTO: PlayerDTO, player: Player, team: Team): PlayerPerformance {
-        val performance = performanceMapper.fromPlayerDTO(playerDTO, player, team)
-        return save(performance)
-    }
 
     fun save(performance: PlayerPerformance): PlayerPerformance {
         return playerPerformanceRepository.save(performance)

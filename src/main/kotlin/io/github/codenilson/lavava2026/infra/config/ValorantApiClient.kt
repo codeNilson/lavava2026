@@ -6,13 +6,16 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
-class RiotApiClient(@param:Value("\${api.base_url}") private val baseUrl: String) {
+class ValorantApiClient(
+    @param:Value("\${api.valorant.base_url}") private val baseUrl: String,
+    @param:Value("\${api.valorant.key}") private val apiKey: String
+) {
     @Bean
-    fun webClient(builder: WebClient.Builder): WebClient {
+    fun valorantWebClient(builder: WebClient.Builder): WebClient {
         return builder
             .baseUrl(baseUrl)
             .defaultHeader("Content-Type", "application/json")
-//            .defaultHeader("Authorization", "")
+            .defaultHeader("Authorization", apiKey)
             .build()
     }
 }

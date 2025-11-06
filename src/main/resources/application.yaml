@@ -10,4 +10,6 @@ spring:
       ddl-auto: none
 
 api:
-  base_url: ${BASE_URL:https://api.henrikdev.xyz}
+  valorant:
+    base_url: ${VALORANT_API_URL:https://api.henrikdev.xyz}
+    key: ${VALORANT_API_URL:CHANGE-IT}

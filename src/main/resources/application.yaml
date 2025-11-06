@@ -10,4 +10,4 @@ spring:
       ddl-auto: none
 
 api:
-  base_url: ${BASE_URL:http://localhost:80}
+  base_url: ${BASE_URL:https://api.henrikdev.xyz}

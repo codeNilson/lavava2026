@@ -15,7 +15,7 @@ class RiotApiService(private val webClient: WebClient) {
     fun fetchMatch(matchId: String): Mono<ValorantMatchDTO> {
         return webClient
             .get()
-            .uri("/lol/match/v5/matches/$matchId")
+            .uri("/valorant/v4/match/br/$matchId")
             .retrieve()
             .onStatus({ status -> status == HttpStatus.UNAUTHORIZED }, {
                 resp -> Mono.error(InvalidCredentialsException("Unauthorized when calling Riot API"))

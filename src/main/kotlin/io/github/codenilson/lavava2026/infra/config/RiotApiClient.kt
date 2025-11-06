@@ -10,8 +10,9 @@ class RiotApiClient(@param:Value("\${api.base_url}") private val baseUrl: String
     @Bean
     fun webClient(builder: WebClient.Builder): WebClient {
         return builder
-        .baseUrl(baseUrl)
-        .defaultHeader("Content-Type", "application/json")
-        .build()
+            .baseUrl(baseUrl)
+            .defaultHeader("Content-Type", "application/json")
+//            .defaultHeader("Authorization", "")
+            .build()
     }
 }

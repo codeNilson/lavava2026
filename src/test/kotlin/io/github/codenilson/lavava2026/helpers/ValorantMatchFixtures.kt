@@ -1,7 +1,7 @@
 package io.github.codenilson.lavava2026.helpers
 
 import io.github.codenilson.lavava2026.domain.valorant.dto.MatchInfoDTO
-import io.github.codenilson.lavava2026.domain.valorant.dto.ValorantMatchDTO
+import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.rounds.RoundResultDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.teams.TeamDTO

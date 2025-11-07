@@ -2,7 +2,7 @@ package io.github.codenilson.lavava2026.application.services
 
 import io.github.codenilson.lavava2026.application.exceptions.InvalidCredentialsException
 import io.github.codenilson.lavava2026.domain.valorant.dto.HenrikResponseDTO
-import io.github.codenilson.lavava2026.domain.valorant.dto.ValorantMatchDTO
+import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service

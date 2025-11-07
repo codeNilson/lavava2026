@@ -4,7 +4,7 @@ import io.github.codenilson.lavava2026.application.exceptions.ResourceAlreadyExi
 import io.github.codenilson.lavava2026.application.mapper.MatchMapper
 import io.github.codenilson.lavava2026.domain.matches.Match
 import io.github.codenilson.lavava2026.domain.matches.MatchRepository
-import io.github.codenilson.lavava2026.domain.valorant.dto.ValorantMatchDTO
+import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
 import org.springframework.stereotype.Service
 
 @Service

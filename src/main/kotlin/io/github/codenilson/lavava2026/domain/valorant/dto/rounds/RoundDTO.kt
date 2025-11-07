@@ -6,7 +6,7 @@ import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerRoundSt
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class RoundResultDTO(
-    @JsonProperty("id") val roundNum: Int,
+    @param:JsonProperty("id") val roundNum: Int,
     // result
     val result: String, //(ex: detonate)
     // val roundCeremony: String,

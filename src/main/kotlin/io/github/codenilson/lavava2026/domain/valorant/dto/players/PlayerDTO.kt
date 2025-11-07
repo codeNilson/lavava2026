@@ -14,7 +14,7 @@ data class PlayerInfoDTO(
     val partyId: UUID,
     val agent: Agent,
     val stats: PlayerStatsDto,
-    @JsonProperty("tier") val competitiveTier: Tier,
+    @param:JsonProperty("tier") val competitiveTier: Tier,
     // val isObserver: Boolean,
     val cardId: UUID,
     val titleId: UUID,

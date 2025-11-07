@@ -10,10 +10,10 @@ import java.util.UUID
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ValorantMatchDTO(
-    @JsonProperty("metadata") val matchInfo: MatchInfoDTO,
+    @param:JsonProperty("metadata") val matchInfo: MatchInfoDTO,
     val players: List<PlayerInfoDTO>,
     val teams: List<TeamDTO>,
-    @JsonProperty("rounds") val roundResults: List<RoundResultDTO>,
+    @param:JsonProperty("rounds") val roundResults: List<RoundResultDTO>,
     val kills: List<KillDTO>,
 )
 
@@ -22,8 +22,8 @@ data class MatchInfoDTO(
     val matchId: String,
     val map: Map,
     val gameVersion: String,
-    @JsonProperty("game_length_in_ms") val gameLengthMillis: Long,
-    @JsonProperty("started_at") val gameStartMillis: Long, // TODO: Date-time
+    @param:JsonProperty("game_length_in_ms") val gameLengthMillis: Long,
+    @param:JsonProperty("started_at") val gameStartMillis: Long, // TODO: Date-time
     val isCompleted: Boolean,
     // queue
     val seasonId: String, // TODO: change to season object

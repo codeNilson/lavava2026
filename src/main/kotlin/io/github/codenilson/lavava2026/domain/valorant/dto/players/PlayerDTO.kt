@@ -37,22 +37,26 @@ data class PlayerStatsDto(
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class PlayerRoundStatsDto(
     val puuid: String,
-    // val kills: List<KillDto>,
-    val player: PlayerInfoDTO,
-    val team: String, // ex: red
-    // val score: Int,
+    val player: PlayerRoundInfoDTO,
     val economy: EconomyDto,
+    val stats: PlayerStatsDto,
+    // val kills: List<KillDto>,
+    // val score: Int,
 )
 
 data class PlayerRoundInfoDTO(
+    val puuid: UUID,
     val name: String,
     val tag: String,
+    val team: String,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class KillDTO(
-    val killer: String, // puuid of the killer
-    val victim: String, // puuid of the victim
+    val round: Int,
+    val killer: PlayerRoundInfoDTO,
+    val victim: PlayerRoundInfoDTO,
+    val team: String, // ex: red
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

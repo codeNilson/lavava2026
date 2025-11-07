@@ -23,14 +23,14 @@ class Match(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
     @Column(nullable = false, unique = true) var matchRiotId: String,
     //TODO: Verify '?'
-    var gameLength: Int,
+    var gameLength: Long,
     var map: String,
     var gameStartMillis: Long,
+    var startedAt: LocalDateTime,
     var isCompleted: Boolean,
-    // customGameName,
     @Column(nullable = false) var season: String,
-    @OneToMany(mappedBy = "match") val performances: MutableList<PlayerPerformance> = mutableListOf(),
-    @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
+//    @OneToMany(mappedBy = "match") val performances: MutableList<PlayerPerformance> = mutableListOf(),
+//    @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
     @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,
     @CreatedDate @Column(nullable = false, updatable = false) var createdAt: LocalDateTime? = null,
 )

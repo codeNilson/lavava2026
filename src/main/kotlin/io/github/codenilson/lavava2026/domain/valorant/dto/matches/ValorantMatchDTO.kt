@@ -23,7 +23,7 @@ data class MatchInfoDTO(
     val matchId: UUID,
     val map: MapDTO,
     @param:JsonProperty("game_length_in_ms") val gameLengthMillis: Long,
-    @param:JsonProperty("started_at") val gameStartMillis: LocalDateTime,
+    val startedAt: LocalDateTime,
     val isCompleted: Boolean,
     // val region: String,
     // val gameVersion: String,

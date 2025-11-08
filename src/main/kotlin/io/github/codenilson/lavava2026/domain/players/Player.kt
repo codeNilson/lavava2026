@@ -1,6 +1,6 @@
 package io.github.codenilson.lavava2026.domain.players
 
-import io.github.codenilson.lavava2026.domain.playersPerformances.PlayerPerformance
+import io.github.codenilson.lavava2026.domain.performances.Performance
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
@@ -36,15 +36,15 @@ class Player(
 
 
         // TODO: Verify constraints after getting Riot API
-        var competitiveTier: Int? = null,
-        var playerCard: String? = null,
-        var playerTitle: String? = null,
-        var accountLevel: Int? = null,
+        var competitiveTier: String? = null,
+        // var playerCard: String? = null,
+        // var playerTitle: String? = null,
+        var accountLevel: Int,
 
         var active: Boolean = true,
 
         @OneToMany(mappedBy = "player")
-        var performances: MutableList<PlayerPerformance> = mutableListOf(),
+        var performances: MutableList<Performance> = mutableListOf(),
 
         @LastModifiedDate @Column(nullable = false)
         var updatedAt: LocalDateTime? = null,

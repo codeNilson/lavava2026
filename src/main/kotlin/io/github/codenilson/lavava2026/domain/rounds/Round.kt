@@ -2,6 +2,7 @@ package io.github.codenilson.lavava2026.domain.rounds
 
 import io.github.codenilson.lavava2026.domain.players.Player
 import io.github.codenilson.lavava2026.domain.matches.Match
+import io.github.codenilson.lavava2026.domain.teams.Team
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
@@ -16,30 +17,23 @@ import java.util.UUID
 
 @Entity
 @Table(name = "rounds")
-class Round (
+class Round(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
 
     var roundNumber: Int,
-    //TODO: VERIFY
-    //var roundResult: String,
-    //var winningTeam: String,
+    var result: String,
+    @ManyToOne var winningTeam: Team,
 
-    @ManyToOne
-    @JoinColumn(name = "match_id")
-    var match: Match? = null,
+    @ManyToOne @JoinColumn(name = "match_id") var match: Match,
 
-    @ManyToOne
-    @JoinColumn(name = "bomb_planter_id") //TODO: PUUID
-    var bombPlanter: Player? = null,
+    @OneToMany(mappedBy = "round") val kills: MutableList<RoundKill> = mutableListOf(),
 
-    @ManyToOne
-    @JoinColumn(name = "bomb_defuser_id")
-    var bombDefuser: Player? = null,
+//    @ManyToOne
+//    @JoinColumn(name = "bomb_planter_id")
+//    var bombPlanter: Player? = null,
 
-    @OneToMany(mappedBy = "round")
-    val kills: MutableList<RoundKill> = mutableListOf(),
+//    @ManyToOne
+//    @JoinColumn(name = "bomb_defuser_id")
+//    var bombDefuser: Player? = null,
 
-    // var roundResultCode?
 )
-
-// REPRESENTA CAMPOS RoundResultDto DA API DA RIOT

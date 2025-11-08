@@ -10,10 +10,7 @@ data class RoundResultDTO(
     val result: String, //(ex: detonate)
     val winningTeam: String, //(ex: blue, red)
     val playerStats: List<PlayerRoundStatsDto>,
-    // result
     // val roundCeremony: String,
-    // val bombPlanter: String, // TODO: CRIAR OUTRO OBJETO (pode ser null?)
-    // val bombDefuser: String, // TODO: CRIAR OUTRO OBJETO (pode ser null?)
-    // val plantSite: String, // Não existe
-    // val roundResultCode: String, // Não existe
+    // val bombPlanter: String, //
+    // val bombDefuser: String, //
 )

@@ -1,7 +1,8 @@
 package io.github.codenilson.lavava2026.domain.matches
 
-import io.github.codenilson.lavava2026.domain.playersPerformances.PlayerPerformance
+import io.github.codenilson.lavava2026.domain.performances.Performance
 import io.github.codenilson.lavava2026.domain.rounds.Round
+import io.github.codenilson.lavava2026.domain.teams.Team
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
@@ -22,15 +23,20 @@ import java.time.LocalDateTime
 class Match(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
     @Column(nullable = false, unique = true) var matchRiotId: String,
-    //TODO: Verify '?'
     var gameLength: Long,
     var map: String,
     var gameStartMillis: Long,
     var startedAt: LocalDateTime,
     var isCompleted: Boolean,
     @Column(nullable = false) var season: String,
-//    @OneToMany(mappedBy = "match") val performances: MutableList<PlayerPerformance> = mutableListOf(),
-//    @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
+
+    @OneToMany(mappedBy = "match") val teams: MutableList<Team> = mutableListOf(),
+
+    @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
+
+    // montado a partir de match >>> playerInfo >> playerStats
+    @OneToMany(mappedBy = "match") val performances: MutableList<Performance> = mutableListOf(),
+
     @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,
     @CreatedDate @Column(nullable = false, updatable = false) var createdAt: LocalDateTime? = null,
 )

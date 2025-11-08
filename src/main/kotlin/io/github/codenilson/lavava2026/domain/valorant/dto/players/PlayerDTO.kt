@@ -8,16 +8,16 @@ import java.util.UUID
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class PlayerInfoDTO(
     val puuid: UUID,
+    val agent: Agent,
     val name: String,
     val tag: String,
     val teamId: String,
-    val partyId: UUID,
-    val agent: Agent,
     val stats: PlayerStatsDto,
     @param:JsonProperty("tier") val competitiveTier: Tier,
-    val cardId: UUID,
-    val titleId: UUID,
     val accountLevel: Int,
+    // val partyId: UUID,
+    // val cardId: UUID,
+    // val titleId: UUID,
     // val isObserver: Boolean,
 )
 

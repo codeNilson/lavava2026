@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class TeamDTO(
     val teamId: String,
-    val rounds: List<Round>,
+    val rounds: Round,
     val won: Boolean,
     // val roundsPlayed: Int,
     // val roundsWon: Int,

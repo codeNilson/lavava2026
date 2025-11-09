@@ -6,7 +6,6 @@ import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerInfoDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.players.KillDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.rounds.RoundResultDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.teams.TeamDTO
-import java.time.LocalDateTime
 import java.util.UUID
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -23,8 +22,9 @@ data class MatchInfoDTO(
     val matchId: UUID,
     val map: MapDTO,
     @param:JsonProperty("game_length_in_ms") val gameLengthMillis: Long,
-    val startedAt: LocalDateTime,
+//    @param:JsonProperty("started_at") val startedAt: Long, // timestamp em milissegundos
     val isCompleted: Boolean,
+//    val startedAt: LocalDateTime,
     // val region: String,
     // val gameVersion: String,
     // queue

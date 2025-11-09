@@ -9,7 +9,7 @@ data class RoundResultDTO(
     @param:JsonProperty("id") val roundNum: Int,
     val result: String, //(ex: detonate)
     val winningTeam: String, //(ex: blue, red)
-    val playerStats: List<PlayerRoundStatsDto>,
+    val stats: List<PlayerRoundStatsDto>,
     // val roundCeremony: String,
     // val bombPlanter: String, //
     // val bombDefuser: String, //

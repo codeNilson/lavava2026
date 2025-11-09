@@ -13,7 +13,9 @@ import java.time.Duration
 
 //TODO: Change to Valorant API
 @Service
-class ValorantIntegrationService(private val valorantWebClient: WebClient) {
+class ValorantIntegrationService(
+    private val valorantWebClient: WebClient
+) {
     fun fetchMatch(matchId: String): Mono<ValorantMatchDTO> {
         return valorantWebClient
             .get()

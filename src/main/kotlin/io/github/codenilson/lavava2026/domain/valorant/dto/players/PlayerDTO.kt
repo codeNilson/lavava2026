@@ -65,7 +65,7 @@ data class EconomyDto(
 data class Weapon(
     val id: UUID?,
     val name: String?,
-    val type: String?,
+    val type: String,
 )
 
 data class Agent(

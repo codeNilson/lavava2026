@@ -24,7 +24,9 @@ class RoundKill(
 
     @ManyToOne @JoinColumn(name = "victim_id") var victim: Player,
 
-    var weapon: String? = null,
+    var weapon: String?,
+
+    var weaponType: String,
 
     // team
 )

@@ -55,6 +55,7 @@ data class KillDTO(
     val round: Int,
     val killer: PlayerRoundInfoDTO,
     val victim: PlayerRoundInfoDTO,
+    val weapon: Weapon,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -62,8 +63,9 @@ data class EconomyDto(
     val weapon: Weapon?,
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Weapon(
-    val id: UUID?,
+//    val id: UUID?,
     val name: String?,
     val type: String,
 )

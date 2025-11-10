@@ -28,5 +28,4 @@ class RoundKill(
 
     var weaponType: String,
 
-    // team
 )

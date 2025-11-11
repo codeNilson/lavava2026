@@ -12,4 +12,4 @@ spring:
 api:
   valorant:
     base_url: ${VALORANT_API_URL:https://api.henrikdev.xyz}
-    key: ${VALORANT_API_KEY:CHANGE-IT}
+    key: ${VALORANT_API_KEY}

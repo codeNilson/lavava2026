@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: lavava_app
+    restart: unless-stopped
+    env_file:
+      -   .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8080:8080"

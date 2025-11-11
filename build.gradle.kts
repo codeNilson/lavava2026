@@ -16,6 +16,10 @@ java {
 	}
 }
 
+tasks.jar {
+    archiveFileName.set("lavava.jar")
+}
+
 repositories {
 	mavenCentral()
 }

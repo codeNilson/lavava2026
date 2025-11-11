@@ -16,6 +16,7 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
+import java.time.Instant
 
 @Entity
 @Table(name = "matches")
@@ -26,7 +27,7 @@ class Match(
     var gameLength: Long,
     var map: String,
     var gameStartMillis: Long,
-    var startedAt: LocalDateTime,
+    var startedAt: Instant,
     var isCompleted: Boolean,
     @Column(nullable = false) var season: String,
 
@@ -34,7 +35,7 @@ class Match(
 
     @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
 
-    // montado a partir de match >>> playerInfo >> playerStats
+    // montado a partir de match >>> playerInfo (incluido) >> playerStats (incluido)
     @OneToMany(mappedBy = "match") val performances: MutableList<Performance> = mutableListOf(),
 
     @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,

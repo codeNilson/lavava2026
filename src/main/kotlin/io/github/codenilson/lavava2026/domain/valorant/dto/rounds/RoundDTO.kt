@@ -10,7 +10,4 @@ data class RoundResultDTO(
     val result: String, //(ex: detonate)
     val winningTeam: String, //(ex: blue, red)
     val stats: List<PlayerRoundStatsDto>,
-    // val roundCeremony: String,
-    // val bombPlanter: String, //
-    // val bombDefuser: String, //
 )

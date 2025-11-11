@@ -7,9 +7,6 @@ data class TeamDTO(
     val teamId: String,
     val rounds: Round,
     val won: Boolean,
-    // val roundsPlayed: Int,
-    // val roundsWon: Int,
-    // val numPoints: Int,
 )
 
 data class Round(

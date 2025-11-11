@@ -15,10 +15,6 @@ data class PlayerInfoDTO(
     val stats: PlayerStatsDto,
     @param:JsonProperty("tier") val competitiveTier: Tier,
     val accountLevel: Int,
-    // val partyId: UUID,
-    // val cardId: UUID,
-    // val titleId: UUID,
-    // val isObserver: Boolean,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -30,8 +26,6 @@ data class PlayerStatsDto(
     val headshots: Int,
     val legshots: Int,
     val bodyshots: Int,
-    // val roundsPlayed: Int,
-    // val playerTimeMillis: Int,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -39,8 +33,6 @@ data class PlayerRoundStatsDto(
     val player: PlayerRoundInfoDTO,
     val economy: EconomyDto,
     val stats: PlayerStatsDto,
-    // val kills: List<KillDto>,
-    // val score: Int,
 )
 
 data class PlayerRoundInfoDTO(
@@ -65,7 +57,7 @@ data class EconomyDto(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Weapon(
-//    val id: UUID?,
+//    val id: UUID || String,
     val name: String?,
     val type: String,
 )

@@ -23,10 +23,10 @@ import java.time.LocalDateTime
         uniqueConstraints = [UniqueConstraint(columnNames = ["game_name", "tag_name"])]
 )
 class Player(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
+        @Id var puuid: UUID,
 
-        @Column(nullable = false, unique = true)
-        var puuid: String,
+//        @Column(nullable = false, unique = true)
+//        var puuid: UUID,
 
         @Column(name = "game_name", nullable = false)
         var gameName: String,
@@ -44,7 +44,7 @@ class Player(
         var active: Boolean = true,
 
         @OneToMany(mappedBy = "player")
-        var performances: MutableList<Performance> = mutableListOf(),
+        val performances: MutableList<Performance> = mutableListOf(),
 
         @LastModifiedDate @Column(nullable = false)
         var updatedAt: LocalDateTime? = null,

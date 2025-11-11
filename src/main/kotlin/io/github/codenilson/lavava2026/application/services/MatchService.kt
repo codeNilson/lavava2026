@@ -41,6 +41,8 @@ class MatchService(
 
     // função temporária só para testes.
     fun getValorantMatchInfo(matchId: String): ValorantMatchDTO {
-        return valorantIntegrationService.fetchMatch(matchId).block() ?: throw Exception("Match not found")
+        val valorantMatch = valorantIntegrationService.fetchMatch(matchId).block() ?: throw Exception("Match not found")
+        syncMatchUseCase.sync(valorantMatch)
+        return valorantMatch
     }
 }

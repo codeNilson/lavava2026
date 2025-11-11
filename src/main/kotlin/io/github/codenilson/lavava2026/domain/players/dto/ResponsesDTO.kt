@@ -16,7 +16,7 @@ data class PlayerResponseDTO(
     @field:Schema(example = "2025-10-01T08:00:00") var createdAt: LocalDateTime,
 ) {
     constructor(player: Player) : this(
-        id = player.id!!,
+        id = player.puuid,
         gameName = player.gameName,
         tagName = player.tagName,
         competitiveTier = player.competitiveTier,

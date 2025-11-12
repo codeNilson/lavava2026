@@ -21,14 +21,14 @@ import java.time.LocalDateTime
 class Team(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
 
-    var teamRiotId: String,
+    var color: String,
 
     // TODO: Maybe accept null and have a default value
     var won: Boolean,
-    var roundsPlayed: Int,
     var roundsWon: Int,
+    var roundLost: Int,
 
-    @ManyToOne var match: Match,
+    @ManyToOne var match: Match? = null,
 
     @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,
 

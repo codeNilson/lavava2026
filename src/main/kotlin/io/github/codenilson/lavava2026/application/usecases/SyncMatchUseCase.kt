@@ -10,6 +10,7 @@ package io.github.codenilson.lavava2026.application.usecases
 //import io.github.codenilson.lavava2026.application.services.TeamService
 //import io.github.codenilson.lavava2026.application.services.ValorantIntegrationService
 //import io.github.codenilson.lavava2026.domain.rounds.RoundKill
+import io.github.codenilson.lavava2026.application.services.MatchService
 import io.github.codenilson.lavava2026.application.services.PlayerService
 import org.springframework.stereotype.Service
 import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
@@ -92,8 +93,10 @@ import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatch
 @Service
 class SyncMatchUseCase(
     private val playerService: PlayerService,
+    private val matchService: MatchService,
 ) {
     fun sync(valorantMatch: ValorantMatchDTO) {
         val savedPlayers = playerService.createOrUpdatePlayers(valorantMatch.players)
+        val match = matchService.saveValorantMatch(valorantMatch.matchInfo)
     }
 }

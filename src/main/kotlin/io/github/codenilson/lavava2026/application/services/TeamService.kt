@@ -1,5 +1,10 @@
 package io.github.codenilson.lavava2026.application.services
 
+import io.github.codenilson.lavava2026.domain.teams.Team
+import io.github.codenilson.lavava2026.domain.teams.TeamRepository
+import io.github.codenilson.lavava2026.domain.valorant.dto.teams.TeamDTO
+import org.springframework.stereotype.Service
+
 //import io.github.codenilson.lavava2026.application.exceptions.ResourceNotFoundException
 //import io.github.codenilson.lavava2026.domain.teams.Team
 //import io.github.codenilson.lavava2026.domain.teams.TeamRepository
@@ -30,3 +35,20 @@ package io.github.codenilson.lavava2026.application.services
 //        return teamRepository.findByTeamRiotIdIn(teamRiotIds)
 //    }
 //}
+
+@Service
+class TeamService(
+    private val teamRepository: TeamRepository,
+) {
+    fun saveValorantTeam(valorantTeams: List<TeamDTO>) {
+        val teams = valorantTeams.map {
+            Team(
+                color = it.teamId,
+                won = it.won,
+                roundsWon = it.rounds.won,
+                roundLost = it.rounds.lost,
+            )
+        }
+        teamRepository.findAll()
+    }
+}

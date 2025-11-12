@@ -4,9 +4,12 @@ import io.github.codenilson.lavava2026.application.exceptions.ResourceAlreadyExi
 import io.github.codenilson.lavava2026.application.usecases.SyncMatchUseCase
 import io.github.codenilson.lavava2026.domain.matches.Match
 import io.github.codenilson.lavava2026.domain.matches.MatchRepository
+import io.github.codenilson.lavava2026.domain.valorant.dto.matches.MatchInfoDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
+import java.util.UUID
 
 @Service
 class MatchService(
@@ -25,24 +28,31 @@ class MatchService(
 //        return matchRepository.save(match)
 //    }
 
-    fun syncMatch(matchId: String) {
+    fun matchAlreadyExists(matchId: UUID): Boolean {
+        return matchRepository.existsByMatchRiotId(matchId)
+    }
+
+    // função temporária só para testes.
+    @Transactional
+    fun syncMatch(matchId: UUID): ValorantMatchDTO {
+
         if (matchAlreadyExists(matchId)) {
             throw ResourceAlreadyExists("Match with id $matchId already exists")
         }
 
         val valorantMatch = valorantIntegrationService.fetchMatch(matchId).block() ?: throw Exception("Match not found")
-
-        syncMatchUseCase.sync(valorantMatch)
-    }
-
-    fun matchAlreadyExists(matchId: String): Boolean {
-        return matchRepository.existsByMatchRiotId(matchId)
-    }
-
-    // função temporária só para testes.
-    fun getValorantMatchInfo(matchId: String): ValorantMatchDTO {
-        val valorantMatch = valorantIntegrationService.fetchMatch(matchId).block() ?: throw Exception("Match not found")
         syncMatchUseCase.sync(valorantMatch)
         return valorantMatch
+    }
+
+    fun saveValorantMatch(valorantMatch: MatchInfoDTO) : Match {
+        return matchRepository.save(Match(
+            matchRiotId = valorantMatch.matchId,
+            gameLength = valorantMatch.gameLengthMillis,
+            map = valorantMatch.map.name,
+            startedAt = valorantMatch.startedAt,
+            isCompleted = valorantMatch.isCompleted,
+            season = "2026",
+        ))
     }
 }

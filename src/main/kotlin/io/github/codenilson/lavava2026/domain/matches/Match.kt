@@ -23,10 +23,9 @@ import java.time.Instant
 @EntityListeners(AuditingEntityListener::class)
 class Match(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
-    @Column(nullable = false, unique = true) var matchRiotId: String,
+    @Column(nullable = false, unique = true) var matchRiotId: UUID,
     var gameLength: Long,
     var map: String,
-    var gameStartMillis: Long,
     var startedAt: Instant,
     var isCompleted: Boolean,
     @Column(nullable = false) var season: String,

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
 import java.time.Duration
+import java.util.UUID
 
 
 //TODO: Change to Valorant API
@@ -16,7 +17,7 @@ import java.time.Duration
 class ValorantIntegrationService(
     private val valorantWebClient: WebClient
 ) {
-    fun fetchMatch(matchId: String): Mono<ValorantMatchDTO> {
+    fun fetchMatch(matchId: UUID): Mono<ValorantMatchDTO> {
         return valorantWebClient
             .get()
             .uri("/valorant/v4/match/br/$matchId")

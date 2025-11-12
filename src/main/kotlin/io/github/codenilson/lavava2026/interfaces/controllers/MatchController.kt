@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.UUID
 
 @RestController
 @RequestMapping("/matches")
@@ -15,7 +16,7 @@ class MatchController(
 ) {
 
     @GetMapping("/{matchId}")
-    fun getMatchInfo(@PathVariable matchId: String): ValorantMatchDTO {
-        return matchService.getValorantMatchInfo(matchId)
+    fun getMatchInfo(@PathVariable matchId: UUID): ValorantMatchDTO {
+        return matchService.syncMatch(matchId)
     }
 }

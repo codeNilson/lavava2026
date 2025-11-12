@@ -2,8 +2,7 @@ package io.github.codenilson.lavava2026.domain.teams
 
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
+import org.springframework.stereotype.Repository
 
-interface TeamRepository: JpaRepository<Team, UUID> {
-    fun findTeamByTeamRiotId(riotId: String): Team?
-    fun findByTeamRiotIdIn(teamRiotIds: List<String>): List<Team>
-}
+@Repository
+interface TeamRepository: JpaRepository<Team, UUID>

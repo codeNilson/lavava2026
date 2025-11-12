@@ -13,8 +13,8 @@ data class PlayerInfoDTO(
     val tag: String,
     val teamId: String,
     val stats: PlayerStatsDto,
-    @param:JsonProperty("tier") val competitiveTier: Tier,
     val accountLevel: Int,
+    @param:JsonProperty("tier") val competitiveTier: Tier,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

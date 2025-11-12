@@ -1,10 +1,10 @@
 package io.github.codenilson.lavava2026.application.services
 
 //import io.github.codenilson.lavava2026.domain.players.Player
-//import io.github.codenilson.lavava2026.domain.rounds.Round
-//import io.github.codenilson.lavava2026.domain.rounds.RoundRepository
-//import io.github.codenilson.lavava2026.domain.valorant.dto.rounds.RoundResultDTO
-//import org.springframework.stereotype.Service
+import io.github.codenilson.lavava2026.domain.rounds.Round
+import io.github.codenilson.lavava2026.domain.rounds.RoundRepository
+import io.github.codenilson.lavava2026.domain.valorant.dto.rounds.RoundResultDTO
+import org.springframework.stereotype.Service
 //
 //@Service
 //class RoundService(
@@ -27,3 +27,19 @@ package io.github.codenilson.lavava2026.application.services
 //        return roundRepository.saveAll(rounds)
 //    }
 //}
+
+@Service
+class RoundService(
+    private val roundRepository: RoundRepository,
+) {
+    fun createRounds(roundResult: List<RoundResultDTO>) : List<Round> {
+        return roundResult.map {
+            Round(
+                roundNumber = it.roundNum,
+                result = it.result,
+                match = TODO(),
+                winningTeam = TODO(),
+            )
+        }
+    }
+}

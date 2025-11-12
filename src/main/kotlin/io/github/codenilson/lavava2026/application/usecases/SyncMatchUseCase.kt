@@ -1,7 +1,6 @@
 package io.github.codenilson.lavava2026.application.usecases
 
-import io.github.codenilson.lavava2026.application.services.MatchService
-import io.github.codenilson.lavava2026.application.services.PlayerService
+import io.github.codenilson.lavava2026.application.services.*
 import io.github.codenilson.lavava2026.application.services.ValorantIntegrationService
 import io.github.codenilson.lavava2026.application.exceptions.ResourceAlreadyExists
 import org.springframework.stereotype.Service
@@ -87,6 +86,9 @@ import java.util.UUID
 class SyncMatchUseCase(
     private val playerService: PlayerService,
     private val matchService: MatchService,
+    private val teamService: TeamService,
+    private val roundService: RoundService,
+    private val performanceService: PerformanceService,
     private val valorantIntegrationService: ValorantIntegrationService
 ) {
 
@@ -103,8 +105,12 @@ class SyncMatchUseCase(
         val valorantMatch = valorantIntegrationService.fetchMatch(matchId).block()
             ?: throw Exception("Match not found")
 
-        val savedPlayers = playerService.createOrUpdatePlayers(valorantMatch.players)
+        val players = playerService.createOrUpdatePlayers(valorantMatch.players)
+        val performances = performanceService.getPerformance(valorantMatch.players)
         val match = matchService.saveValorantMatch(valorantMatch.matchInfo)
+        val teams = teamService.saveValorantTeam(valorantMatch.teams) // anexar match
+        val rounds = roundService.createRounds(valorantMatch.roundResults) // anexar match e team
+
 
         return valorantMatch
     }

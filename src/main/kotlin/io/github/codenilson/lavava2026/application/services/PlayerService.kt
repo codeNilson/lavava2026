@@ -45,7 +45,7 @@ class PlayerService(
             )
         }
 
-        return playerRepository.saveAll(players)
+        return players
     }
 
 }

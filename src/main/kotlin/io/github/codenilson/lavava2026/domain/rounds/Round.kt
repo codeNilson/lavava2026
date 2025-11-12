@@ -22,9 +22,9 @@ class Round(
 
     var roundNumber: Int,
     var result: String,
-    @ManyToOne var winningTeam: Team?,
 
-    @ManyToOne @JoinColumn(name = "match_id") var match: Match,
+    @ManyToOne var winningTeam: Team? = null,
+    @ManyToOne @JoinColumn(name = "match_id") var match: Match? = null,
 
     @OneToMany(mappedBy = "round") val kills: MutableList<RoundKill> = mutableListOf(),
 

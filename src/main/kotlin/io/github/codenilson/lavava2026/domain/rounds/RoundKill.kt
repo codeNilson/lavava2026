@@ -17,9 +17,9 @@ import java.util.UUID
 class RoundKill(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
 
-    @ManyToOne @JoinColumn(name = "round_id") var round: Round,
+    @ManyToOne @JoinColumn(name = "round_id") var round: Round? = null,
 
-    //TODO: id vs PUUID
+    //TODO: estatistica: quantos vezes o jogador matou e morreu para outro jogador
     @ManyToOne @JoinColumn(name = "killer_id") var killer: Player,
 
     @ManyToOne @JoinColumn(name = "victim_id") var victim: Player,

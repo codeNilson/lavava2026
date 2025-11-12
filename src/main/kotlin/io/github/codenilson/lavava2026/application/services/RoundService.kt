@@ -37,8 +37,8 @@ class RoundService(
             Round(
                 roundNumber = it.roundNum,
                 result = it.result,
-                match = TODO(),
-                winningTeam = TODO(),
+//                match = TODO(),
+//                winningTeam = TODO(),
             )
         }
     }

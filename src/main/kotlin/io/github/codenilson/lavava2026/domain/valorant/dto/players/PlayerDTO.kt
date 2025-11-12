@@ -18,17 +18,6 @@ data class PlayerInfoDTO(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class PlayerStatsDto(
-    val score: Int,
-    val kills: Int,
-    val deaths: Int,
-    val assists: Int,
-    val headshots: Int,
-    val legshots: Int,
-    val bodyshots: Int,
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 data class PlayerRoundStatsDto(
     val player: PlayerRoundInfoDTO,
     val economy: EconomyDto,
@@ -40,6 +29,17 @@ data class PlayerRoundInfoDTO(
     val name: String,
     val tag: String,
     val team: String,
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class PlayerStatsDto(
+    val score: Int,
+    val kills: Int,
+    val deaths: Int,
+    val assists: Int,
+    val headshots: Int,
+    val legshots: Int,
+    val bodyshots: Int,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

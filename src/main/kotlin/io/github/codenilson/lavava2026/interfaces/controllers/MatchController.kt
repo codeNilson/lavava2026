@@ -1,6 +1,7 @@
+// Arquivo: .../controllers/MatchController.kt
 package io.github.codenilson.lavava2026.interfaces.controllers
 
-import io.github.codenilson.lavava2026.application.services.MatchService
+import io.github.codenilson.lavava2026.application.usecases.SyncMatchUseCase
 import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,11 +13,11 @@ import java.util.UUID
 @RestController
 @RequestMapping("/matches")
 class MatchController(
-    private val matchService: MatchService,
+    private val syncMatchUseCase: SyncMatchUseCase
 ) {
 
     @GetMapping("/{matchId}")
     fun getMatchInfo(@PathVariable matchId: UUID): ValorantMatchDTO {
-        return matchService.syncMatch(matchId)
+        return syncMatchUseCase.execute(matchId)
     }
 }

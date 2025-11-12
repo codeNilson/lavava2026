@@ -1,20 +1,13 @@
 package io.github.codenilson.lavava2026.application.usecases
 
-//import io.github.codenilson.lavava2026.application.exceptions.ResourceAlreadyExists
-//import io.github.codenilson.lavava2026.application.exceptions.ResourceNotFoundException
-//import io.github.codenilson.lavava2026.application.services.MatchService
-//import io.github.codenilson.lavava2026.application.services.PlayerService
-//import io.github.codenilson.lavava2026.application.services.PlayerPerformanceService
-//import io.github.codenilson.lavava2026.application.services.RoundKillService
-//import io.github.codenilson.lavava2026.application.services.RoundService
-//import io.github.codenilson.lavava2026.application.services.TeamService
-//import io.github.codenilson.lavava2026.application.services.ValorantIntegrationService
-//import io.github.codenilson.lavava2026.domain.rounds.RoundKill
 import io.github.codenilson.lavava2026.application.services.MatchService
 import io.github.codenilson.lavava2026.application.services.PlayerService
+import io.github.codenilson.lavava2026.application.services.ValorantIntegrationService
+import io.github.codenilson.lavava2026.application.exceptions.ResourceAlreadyExists
 import org.springframework.stereotype.Service
 import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
-//import org.springframework.transaction.annotation.Transactional
+import org.springframework.transaction.annotation.Transactional
+import java.util.UUID
 //
 //@Service
 //class SyncMatchUseCase(
@@ -94,9 +87,25 @@ import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatch
 class SyncMatchUseCase(
     private val playerService: PlayerService,
     private val matchService: MatchService,
+    private val valorantIntegrationService: ValorantIntegrationService
 ) {
-    fun sync(valorantMatch: ValorantMatchDTO) {
+
+    /**
+     * Orquestra a sincronização completa de uma partida.
+     * Busca na API externa, valida e salva no banco de dados.
+     */
+    @Transactional
+    fun execute(matchId: UUID): ValorantMatchDTO {
+        if (matchService.matchAlreadyExists(matchId)) {
+            throw ResourceAlreadyExists("Match with id $matchId already exists")
+        }
+
+        val valorantMatch = valorantIntegrationService.fetchMatch(matchId).block()
+            ?: throw Exception("Match not found")
+
         val savedPlayers = playerService.createOrUpdatePlayers(valorantMatch.players)
         val match = matchService.saveValorantMatch(valorantMatch.matchInfo)
+
+        return valorantMatch
     }
 }

@@ -22,6 +22,7 @@ class RoundKillService(
                 victim = playerRepository.getReferenceById(it.victim.puuid),
                 weapon = it.weapon.name,
                 weaponType = it.weapon.type,
+                roundNum = it.round,
             )
         }
     }

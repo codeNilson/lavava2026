@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.JoinColumn
+import jakarta.persistence.Transient
 
 import java.util.UUID
 
@@ -27,6 +28,8 @@ class Round(
     @ManyToOne @JoinColumn(name = "match_id") var match: Match? = null,
 
     @OneToMany(mappedBy = "round") val kills: MutableList<RoundKill> = mutableListOf(),
+
+    @Transient var winningTeamCollor: String? = null,
 
 //    @ManyToOne
 //    @JoinColumn(name = "bomb_planter_id")

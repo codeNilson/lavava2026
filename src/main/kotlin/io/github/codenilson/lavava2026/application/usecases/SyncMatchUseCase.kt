@@ -36,27 +36,36 @@ class SyncMatchUseCase(
         val playersTeam = valorantMatch.players.groupBy { it.teamId } // {"red": [playerInfo1, playerInfo2], "blue": [playerInfo3, playerInfo4]}
 
         val match = matchService.saveValorantMatch(valorantMatch.matchInfo)
-        val performances = performanceService.getPerformance(valorantMatch.players).onEach { it.match = match } // TODO: anexar player, match e team
+        val performances = performanceService.getPerformance(valorantMatch.players).onEach { it.match = match }
         val teams = teamService.saveValorantTeam(valorantMatch.teams).onEach { it.match = match }
+        val rounds = roundService.createRounds(valorantMatch.roundResults).onEach {
+            it.match = match
+            val team = teams.first { team -> team.color == it.winningTeamCollor }
+            it.winningTeam = team
+        }
+        val kill = roundKillService.getKills(valorantMatch.kills).onEach {
+            val round = rounds.first { round -> round.roundNumber == it.roundNum }
+            it.round = round
+        }
         val players = playerService.createOrUpdatePlayers(valorantMatch.players).onEach {
-
             for ((teamId, playersInfo) in playersTeam) {
-                val puuids = playersInfo.map {it.puuid}
+                val puuids = playersInfo.map { it.puuid }
 
                 if (it.puuid in puuids) {
-                    val team = teams.first { team -> team.color == teamId } // Pega o time correto baseado na cor
-                    val performance = performances.first { perf -> perf.player?.puuid == it.puuid } // Pega o performance correto baseado no puuid do player
-                    performance.player = it
-                    performance.team = team
-                    break
+                    val team = teams.firstOrNull { team -> team.color == teamId }
+                    val performance = performances.firstOrNull { perf -> perf.player?.puuid == it.puuid }
+
+                    if (team != null && performance != null) {
+                        performance.player = it
+                        performance.team = team
+                        break
+                    } else {
+                        // Log para debug
+                        println("Team ou Performance não encontrado para player: ${it.puuid}")
+                    }
                 }
-
             }
-
         }
-        val rounds = roundService.createRounds(valorantMatch.roundResults).onEach { it.match = match } // TODO: anexar match e team
-        val kill = roundKillService.getKills(valorantMatch.kills) // TODO: anexar round
-
 
         return valorantMatch
     }

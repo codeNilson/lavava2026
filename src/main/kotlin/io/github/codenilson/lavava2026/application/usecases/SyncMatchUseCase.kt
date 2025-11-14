@@ -42,11 +42,11 @@ class SyncMatchUseCase(
             val team = teams.first { team -> team.color == it.winningTeamColor }
             it.winningTeam = team
         }
-        roundKillService.createKillsFromDTO(valorantMatch.kills).onEach {
+        val kills = roundKillService.createKillsFromDTO(valorantMatch.kills).onEach {
             val round = rounds.first { round -> round.roundNumber == it.roundNum }
             it.round = round
         }
-        playerService.createPlayersFromDTO(valorantMatch.players).onEach {
+        val players = playerService.createPlayersFromDTO(valorantMatch.players).onEach {
             for ((teamId, playersInfo) in playersTeam) {
                 val puuids = playersInfo.map { it.puuid }
 
@@ -65,6 +65,13 @@ class SyncMatchUseCase(
                 }
             }
         }
+
+        matchService.save(match)
+        playerService.saveAll(players)
+        teamService.saveAll(teams)
+        roundService.saveAll(rounds)
+        performanceService.saveAll(performances)
+        roundKillService.saveAll(kills)
 
         return valorantMatch
     }

@@ -14,8 +14,12 @@ class PlayerService(
     private val playerRepository: PlayerRepository
 ) {
 
-    fun save(player: Player): player {
+    fun save(player: Player): Player {
         return playerRepository.save(player)
+    }
+
+    fun saveAll(players: List<Player>): List<Player> {
+        return playerRepository.saveAll(players)
     }
 
     fun findAll(active: Boolean? = null, sort: Sort): List<PlayerResponseDTO> {

@@ -15,6 +15,10 @@ class TeamService(
         return teamRepository.save(team)
     }
 
+    fun saveAll(teams: List<Team>): List<Team> {
+        return teamRepository.saveAll(teams)
+    }
+
     fun createTeamsFromDTO(valorantTeams: List<TeamDTO>): List<Team> {
         val teams =
                 valorantTeams.map {

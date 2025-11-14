@@ -16,6 +16,10 @@ class PerformanceService(
         return performanceRepository.save(performance)
     }
 
+    fun saveAll(performances: List<Performance>): List<Performance> {
+        return performanceRepository.saveAll(performances)
+    }
+
     fun createPerformancesFromDTO(playersStats: List<PlayerInfoDTO>) : List<Performance> {
         return playersStats.map {
             Performance(

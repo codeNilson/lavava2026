@@ -15,6 +15,10 @@ class RoundService(
         return roundRepository.save(round)
     }
 
+    fun saveAll(rounds: List<Round>): List<Round> {
+        return roundRepository.saveAll(rounds)
+    }
+
     fun createRoundsFromDTO(roundResult: List<RoundResultDTO>) : List<Round> {
         return roundResult.map {
             Round(

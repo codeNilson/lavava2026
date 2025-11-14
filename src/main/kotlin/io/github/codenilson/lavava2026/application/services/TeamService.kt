@@ -26,7 +26,7 @@ class TeamService(
                             color = it.teamId,
                             won = it.won,
                             roundsWon = it.rounds.won,
-                            roundLost = it.rounds.lost,
+                            roundsLost = it.rounds.lost,
                     )
                 }
         return teams

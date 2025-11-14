@@ -26,7 +26,7 @@ class Team(
     // TODO: Maybe accept null and have a default value
     var won: Boolean,
     var roundsWon: Int,
-    var roundLost: Int,
+    var roundsLost: Int,
 
     @ManyToOne var match: Match? = null,
 

@@ -30,12 +30,4 @@ class Round(
 
     @Transient var winningTeamColor: String? = null,
 
-//    @ManyToOne
-//    @JoinColumn(name = "bomb_planter_id")
-//    var bombPlanter: Player? = null,
-
-//    @ManyToOne
-//    @JoinColumn(name = "bomb_defuser_id")
-//    var bombDefuser: Player? = null,
-
 )

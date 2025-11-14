@@ -31,9 +31,6 @@ class PerformanceService(
                 headshots = it.stats.headshots,
                 legshots = it.stats.legshots,
                 bodyshots = it.stats.bodyshots,
-//                player = TODO(),
-//                match = TODO(),
-//                team = TODO(),
             )
         }
     }

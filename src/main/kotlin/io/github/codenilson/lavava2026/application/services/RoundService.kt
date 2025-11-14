@@ -22,7 +22,7 @@ class RoundService(
     fun createRoundsFromDTO(roundResult: List<RoundResultDTO>) : List<Round> {
         return roundResult.map {
             Round(
-                roundNumber = it.roundNum,
+                roundNumber = it.roundNum + 1,
                 result = it.result,
                 winningTeamColor = it.winningTeam,
             )

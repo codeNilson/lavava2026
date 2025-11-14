@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service
 @Service
 class MatchService(private val matchRepository: MatchRepository) {
 
+    fun save(match: Match): Match {
+        return matchRepository.save(match)
+    }
+
     fun matchAlreadyExists(matchId: UUID): Boolean {
         return matchRepository.existsByMatchRiotId(matchId)
     }

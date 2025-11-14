@@ -11,6 +11,11 @@ class RoundKillService(
     private val roundKillRepository: RoundKillRepository,
     private val playerRepository: PlayerRepository,
 ) {
+
+    fun save(kill: RoundKill): RoundKill {
+        return roundKillRepository.save(kill)
+    }
+
     fun saveAll(rounds: List<RoundKill>): List<RoundKill> {
         return roundKillRepository.saveAll(rounds)
     }

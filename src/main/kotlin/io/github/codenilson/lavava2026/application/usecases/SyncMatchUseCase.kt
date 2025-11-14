@@ -32,7 +32,7 @@ class SyncMatchUseCase(
         val valorantMatch = valorantIntegrationService.fetchMatch(matchId).block()
             ?: throw Exception("Match not found")
 
-        val playersTeam = valorantMatch.players.groupBy { it.teamId } // {"red": [playerInfo1, playerInfo2], "blue": [playerInfo3, playerInfo4]}
+        val playersTeam = valorantMatch.players.groupBy { it.teamId }
 
         val match = matchService.createMatchFromDTO(valorantMatch.matchInfo)
         val performances = performanceService.createPerformancesFromDTO(valorantMatch.players).onEach { it.match = match }

@@ -13,6 +13,11 @@ import java.util.UUID
 class PlayerService(
     private val playerRepository: PlayerRepository
 ) {
+
+    fun save(player: Player): player {
+        return playerRepository.save(player)
+    }
+
     fun findAll(active: Boolean? = null, sort: Sort): List<PlayerResponseDTO> {
         val players = if (active == null) {
             playerRepository.findAll(sort)

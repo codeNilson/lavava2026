@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service
 class PerformanceService(
     private val performanceRepository: PerformanceRepository,
 ) {
-    fun getPerformance(playersStats: List<PlayerInfoDTO>) : List<Performance> {
+    fun createPerformancesFromDTO(playersStats: List<PlayerInfoDTO>) : List<Performance> {
         return playersStats.map {
             Performance(
                 agent = it.agent.name,

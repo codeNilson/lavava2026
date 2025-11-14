@@ -34,19 +34,19 @@ class SyncMatchUseCase(
 
         val playersTeam = valorantMatch.players.groupBy { it.teamId } // {"red": [playerInfo1, playerInfo2], "blue": [playerInfo3, playerInfo4]}
 
-        val match = matchService.saveValorantMatch(valorantMatch.matchInfo)
-        val performances = performanceService.getPerformance(valorantMatch.players).onEach { it.match = match }
-        val teams = teamService.saveValorantTeam(valorantMatch.teams).onEach { it.match = match }
-        val rounds = roundService.createRounds(valorantMatch.roundResults).onEach {
+        val match = matchService.createMatchFromDTO(valorantMatch.matchInfo)
+        val performances = performanceService.createPerformancesFromDTO(valorantMatch.players).onEach { it.match = match }
+        val teams = teamService.createTeamsFromDTO(valorantMatch.teams).onEach { it.match = match }
+        val rounds = roundService.createRoundsFromDTO(valorantMatch.roundResults).onEach {
             it.match = match
             val team = teams.first { team -> team.color == it.winningTeamColor }
             it.winningTeam = team
         }
-        val kill = roundKillService.getKills(valorantMatch.kills).onEach {
+        roundKillService.createKillsFromDTO(valorantMatch.kills).onEach {
             val round = rounds.first { round -> round.roundNumber == it.roundNum }
             it.round = round
         }
-        val players = playerService.createOrUpdatePlayers(valorantMatch.players).onEach {
+        playerService.createPlayersFromDTO(valorantMatch.players).onEach {
             for ((teamId, playersInfo) in playersTeam) {
                 val puuids = playersInfo.map { it.puuid }
 

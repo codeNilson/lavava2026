@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service
 class RoundService(
     private val roundRepository: RoundRepository,
 ) {
-    fun createRounds(roundResult: List<RoundResultDTO>) : List<Round> {
+    fun createRoundsFromDTO(roundResult: List<RoundResultDTO>) : List<Round> {
         return roundResult.map {
             Round(
                 roundNumber = it.roundNum,

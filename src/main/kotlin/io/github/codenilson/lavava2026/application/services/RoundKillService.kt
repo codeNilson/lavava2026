@@ -15,7 +15,7 @@ class RoundKillService(
         return roundKillRepository.saveAll(rounds)
     }
 
-    fun getKills(roundKills: List<KillDTO>) : List<RoundKill> {
+    fun createKillsFromDTO(roundKills: List<KillDTO>) : List<RoundKill> {
         return roundKills.map {
             RoundKill(
                 killer =  playerRepository.getReferenceById(it.killer.puuid),

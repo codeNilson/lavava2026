@@ -33,7 +33,7 @@ class PlayerService(
         return playerRepository.findByPuuidIn(puuids)
     }
 
-    fun createOrUpdatePlayers(playersInfos: List<PlayerInfoDTO>): List<Player> {
+    fun createPlayersFromDTO(playersInfos: List<PlayerInfoDTO>): List<Player> {
 
         val players = playersInfos.map {
             Player(

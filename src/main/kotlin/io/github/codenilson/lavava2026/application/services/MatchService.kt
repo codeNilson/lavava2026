@@ -14,7 +14,7 @@ class MatchService(private val matchRepository: MatchRepository) {
         return matchRepository.existsByMatchRiotId(matchId)
     }
 
-    fun saveValorantMatch(valorantMatch: MatchInfoDTO): Match {
+    fun createMatchFromDTO(valorantMatch: MatchInfoDTO): Match {
 
         return Match(
                 matchRiotId = valorantMatch.matchId,

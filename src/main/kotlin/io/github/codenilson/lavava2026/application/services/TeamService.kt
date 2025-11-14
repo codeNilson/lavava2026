@@ -40,7 +40,7 @@ import org.springframework.stereotype.Service
 class TeamService(
         private val teamRepository: TeamRepository,
 ) {
-    fun saveValorantTeam(valorantTeams: List<TeamDTO>): List<Team> {
+    fun createTeamsFromDTO(valorantTeams: List<TeamDTO>): List<Team> {
         val teams =
                 valorantTeams.map {
                     Team(

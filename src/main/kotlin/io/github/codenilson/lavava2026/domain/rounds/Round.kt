@@ -1,6 +1,5 @@
 package io.github.codenilson.lavava2026.domain.rounds
 
-import io.github.codenilson.lavava2026.domain.players.Player
 import io.github.codenilson.lavava2026.domain.matches.Match
 import io.github.codenilson.lavava2026.domain.teams.Team
 
@@ -29,7 +28,7 @@ class Round(
 
     @OneToMany(mappedBy = "round") val kills: MutableList<RoundKill> = mutableListOf(),
 
-    @Transient var winningTeamCollor: String? = null,
+    @Transient var winningTeamColor: String? = null,
 
 //    @ManyToOne
 //    @JoinColumn(name = "bomb_planter_id")

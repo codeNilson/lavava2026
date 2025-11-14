@@ -5,7 +5,6 @@ import io.github.codenilson.lavava2026.application.services.ValorantIntegrationS
 import io.github.codenilson.lavava2026.application.exceptions.ResourceAlreadyExists
 import org.springframework.stereotype.Service
 import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
-import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerInfoDTO
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
@@ -40,7 +39,7 @@ class SyncMatchUseCase(
         val teams = teamService.saveValorantTeam(valorantMatch.teams).onEach { it.match = match }
         val rounds = roundService.createRounds(valorantMatch.roundResults).onEach {
             it.match = match
-            val team = teams.first { team -> team.color == it.winningTeamCollor }
+            val team = teams.first { team -> team.color == it.winningTeamColor }
             it.winningTeam = team
         }
         val kill = roundKillService.getKills(valorantMatch.kills).onEach {

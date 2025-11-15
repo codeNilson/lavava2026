@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
+import jakarta.transaction.Transactional
 import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -33,6 +34,7 @@ class PlayerController(
         ]
     )
     @GetMapping
+    @Transactional
     fun getPlayers(
         @RequestParam(required = false)
         @Parameter(description = "Filter by active status. true for only active, false for only inactive, null for all.")
@@ -42,10 +44,13 @@ class PlayerController(
         orderBy: String,
         @RequestParam(defaultValue = "ASC")
         @Parameter(description = "Sort direction. Possible values: ASC, DESC.")
-        direction: String
+        direction: String,
+        @RequestParam(name = "season", required = false)
+        @Parameter(description = "Season to compute stats. Defaults to current year if not provided.")
+        season: String?
     ): ResponseEntity<List<PlayerResponseDTO>> {
         val sort = Sort.by(Sort.Direction.fromString(direction.uppercase()), orderBy)
-        val players = playerService.findAll(active, sort)
+        val players = playerService.findAll(active, sort, season)
         return ResponseEntity.ok(players)
     }
 
@@ -66,9 +71,12 @@ class PlayerController(
     @GetMapping("/{puuid}")
     fun getPlayerByPuuid(
         @Parameter(description = "Player Puuid")
-        @PathVariable puuid: UUID
+        @PathVariable puuid: UUID,
+        @RequestParam(name = "season", required = false)
+        @Parameter(description = "Season to compute stats. Defaults to current year if not provided.")
+        season: String?
     ): ResponseEntity<PlayerResponseDTO> {
-        val player = playerService.findByPuuid(puuid)
-        return ResponseEntity.ok(PlayerResponseDTO(player))
+        val dto = playerService.getByPuuidWithStats(puuid, season)
+        return ResponseEntity.ok(dto)
     }
 }

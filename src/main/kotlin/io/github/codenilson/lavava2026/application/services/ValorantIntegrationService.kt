@@ -12,7 +12,6 @@ import java.time.Duration
 import java.util.UUID
 
 
-//TODO: Change to Valorant API
 @Service
 class ValorantIntegrationService(
     private val valorantWebClient: WebClient

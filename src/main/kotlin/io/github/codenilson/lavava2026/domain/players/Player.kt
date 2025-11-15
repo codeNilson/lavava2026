@@ -34,9 +34,7 @@ class Player(
         @Column(name = "tag_name", nullable = false)
         var tagName: String,
 
-
-        // TODO: Verify constraints after getting Riot API
-        var competitiveTier: String? = null,
+        var competitiveTier: String,
         // var playerCard: String? = null,
         // var playerTitle: String? = null,
         var accountLevel: Int,

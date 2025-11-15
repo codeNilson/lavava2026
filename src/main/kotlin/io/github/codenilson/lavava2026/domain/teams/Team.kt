@@ -23,7 +23,6 @@ class Team(
 
     var color: String,
 
-    // TODO: Maybe accept null and have a default value
     var won: Boolean,
     var roundsWon: Int,
     var roundsLost: Int,
@@ -34,6 +33,4 @@ class Team(
 
     @CreatedDate @Column(nullable = false, updatable = false) var createdAt: LocalDateTime? = null,
 
-    // @OneToMany(mappedBy = "team")
-    // var performances: MutableList<Performance> = mutableListOf(),
 )

@@ -17,7 +17,8 @@ class MatchController(
 ) {
 
     @GetMapping("/{matchId}")
-    fun getMatchInfo(@PathVariable matchId: UUID): ValorantMatchDTO {
-        return syncMatchUseCase.execute(matchId)
+    fun getMatchInfo(@PathVariable matchId: UUID): ResponseEntity<Void> {
+        syncMatchUseCase.execute(matchId)
+        return ResponseEntity.ok().build()
     }
 }

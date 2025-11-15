@@ -1,22 +1,19 @@
 package io.github.codenilson.lavava2026.domain.ranking
 
-import io.github.codenilson.lavava2026.domain.players.Player
 import io.github.codenilson.lavava2026.domain.ranking.dto.PlayerRankingDTO
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface RankingRepository : JpaRepository<Player, UUID> {
+interface RankingRepository : JpaRepository<io.github.codenilson.lavava2026.domain.players.Player, UUID> {
 
-    /**
-     * Busca o ranking completo dos jogadores, calculado via SQL nativo.
-     */
     @Query(
         value = """
             WITH
-            -- CTE 1: Calcula partidas jogadas, vencidas e perdidas
+            -- CTE 1: Calcula partidas jogadas, vencidas e perdidas (FILTRADO)
             PlayerMatchStats AS (
                 SELECT
                     p.player_id,
@@ -26,23 +23,31 @@ interface RankingRepository : JpaRepository<Player, UUID> {
                     performances p
                 JOIN
                     teams t ON p.team_id = t.id
+                JOIN
+                    matches m ON p.match_id = m.id
+                WHERE
+                    m.season = :season
                 GROUP BY
                     p.player_id
             ),
             
-            -- CTE 2: Descobre a pontuação MÁXIMA (score) para cada time em cada partida
+            -- CTE 2: Descobre a pontuação MÁXIMA (score) (FILTRADO)
             TeamMVPs AS (
                 SELECT
-                    match_id,
-                    team_id,
-                    MAX(score) as max_score
+                    p.match_id,
+                    p.team_id,
+                    MAX(p.score) as max_score
                 FROM
-                    performances
+                    performances p
+                JOIN
+                    matches m ON p.match_id = m.id
+                WHERE
+                    m.season = :season
                 GROUP BY
-                    match_id, team_id
+                    p.match_id, p.team_id
             ),
             
-            -- CTE 3: Compara o score do jogador com o score máximo do time para contar MVPs
+            -- CTE 3: Conta MVPs (Baseado na CTE 2, portanto, FILTRADO)
             PlayerMVPStats AS (
                 SELECT
                     p.player_id,
@@ -60,18 +65,24 @@ interface RankingRepository : JpaRepository<Player, UUID> {
             -- CTE 4: Encontra rounds com 5+ kills (Aces)
             PlayerRoundAces AS (
                 SELECT
-                    killer_id,
-                    round_id,
-                    COUNT(id) as kills_in_round
+                    rk.killer_id,
+                    rk.round_id,
+                    COUNT(rk.id) as kills_in_round
                 FROM
-                    round_kills
+                    round_kills rk
+                JOIN
+                    rounds r ON rk.round_id = r.id    -- << NOVO JOIN
+                JOIN
+                    matches m ON r.match_id = m.id  -- << NOVO JOIN
+                WHERE
+                    m.season = :season                   -- << NOVO FILTRO
                 GROUP BY
-                    killer_id, round_id
+                    rk.killer_id, rk.round_id
                 HAVING
-                    COUNT(id) >= 5
+                    COUNT(rk.id) >= 5
             ),
             
-            -- CTE 5: Conta o total de Aces por jogador
+            -- CTE 5: Conta o total de Aces (Baseado na CTE 4, portanto, FILTRADO)
             PlayerAceStats AS (
                 SELECT
                     killer_id as player_id,
@@ -82,7 +93,7 @@ interface RankingRepository : JpaRepository<Player, UUID> {
                     killer_id
             ),
             
-            -- CTE 6: Encontra partidas únicas onde um jogador matou com faca
+            -- CTE 6: Encontra partidas únicas com kill de faca (FILTRADO)
             PlayerKnifeKillStats AS (
                 SELECT DISTINCT
                     rk.killer_id as player_id,
@@ -91,11 +102,14 @@ interface RankingRepository : JpaRepository<Player, UUID> {
                     round_kills rk
                 JOIN
                     rounds r ON rk.round_id = r.id
+                JOIN
+                    matches m ON r.match_id = m.id
                 WHERE
                     rk.weapon_type = 'Melee'
+                    AND m.season = :season
             ),
             
-            -- CTE 7: Conta os pontos de faca (1 por partida)
+            -- CTE 7: Conta os pontos de faca (Baseado na CTE 6, portanto, FILTRADO)
             PlayerKnifePoints AS (
                 SELECT
                     player_id,
@@ -105,6 +119,8 @@ interface RankingRepository : JpaRepository<Player, UUID> {
                 GROUP BY
                     player_id
             )
+            
+            -- Query Final: Junta tudo
             SELECT
                 CAST(p.puuid AS VARCHAR) as playerId,
                 p.game_name as gameName,
@@ -145,7 +161,7 @@ interface RankingRepository : JpaRepository<Player, UUID> {
                 mvpCount DESC,
                 winRate DESC;
         """,
-        nativeQuery = true // <-- Isto diz ao Spring: "Execute este SQL diretamente!"
+        nativeQuery = true
     )
-    fun getRankedPlayers(): List<PlayerRankingDTO>
+    fun getRankedPlayers(@Param("season") season: String): List<PlayerRankingDTO>
 }

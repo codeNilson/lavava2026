@@ -8,5 +8,4 @@ import java.util.UUID
 @Repository
 interface PlayerRepository : JpaRepository<Player, UUID> {
     fun findByActive(active: Boolean?, sort: Sort): List<Player>
-    fun findByPuuidIn(puuids: List<UUID>): List<Player>
 }

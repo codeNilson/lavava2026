@@ -4,7 +4,6 @@ import io.github.codenilson.lavava2026.application.exceptions.ResourceNotFoundEx
 import io.github.codenilson.lavava2026.domain.players.Player
 import io.github.codenilson.lavava2026.domain.players.PlayerRepository
 import io.github.codenilson.lavava2026.domain.players.dto.PlayerResponseDTO
-import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerInfoDTO
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.util.UUID
@@ -32,29 +31,10 @@ class PlayerService(
         return players.map(::PlayerResponseDTO)
     }
 
-    fun findByPuuid(puuid: UUID): Player { // TODO: change to players Response
+    fun findByPuuid(puuid: UUID): Player {
         val player = playerRepository.findById(puuid)
             .orElseThrow { throw ResourceNotFoundException("Player with puuid $puuid not found") }
         return player
-    }
-
-    fun findAllByPuuid(puuids: List<UUID>): List<Player> {
-        return playerRepository.findByPuuidIn(puuids)
-    }
-
-    fun createPlayersFromDTO(playersInfos: List<PlayerInfoDTO>): List<Player> {
-
-        val players = playersInfos.map {
-            Player(
-                puuid = it.puuid,
-                gameName = it.name,
-                tagName = it.tag,
-                competitiveTier = it.competitiveTier.name,
-                accountLevel = it.accountLevel,
-            )
-        }
-
-        return players
     }
 
 }

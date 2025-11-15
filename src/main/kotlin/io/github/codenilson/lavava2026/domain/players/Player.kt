@@ -25,9 +25,6 @@ import java.time.LocalDateTime
 class Player(
         @Id var puuid: UUID,
 
-//        @Column(nullable = false, unique = true)
-//        var puuid: UUID,
-
         @Column(name = "game_name", nullable = false)
         var gameName: String,
 

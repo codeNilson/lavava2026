@@ -33,4 +33,32 @@ class ValorantIntegrationService(
             .map { it.data }
             .timeout(Duration.ofSeconds(15))
     }
+
+    fun fetchMatches(
+        region: String = "br",
+        platform: String = "pc",
+        gameName: String,
+        tagName: String,
+        map: String? = null,
+    ): Mono<List<ValorantMatchDTO>> {
+        return valorantWebClient
+            .get()
+            .uri("/valorant/v4/matches/$region/$platform/$gameName/$tagName") {
+                if (map != null) {
+                    it.queryParam("map", map)
+                }
+                it.build()
+            }
+            .retrieve()
+            .onStatus({ status -> status == HttpStatus.UNAUTHORIZED }, { resp ->
+                Mono.error(InvalidCredentialsException("Unauthorized when calling Riot API"))
+            })
+            .onStatus({ status -> status == HttpStatus.NOT_FOUND }, { resp ->
+                Mono.error(ResourceNotFoundException("Matches for player $gameName#$tagName not found"))
+            })
+            // TODO: Handle other status codes (404, 500, etc)
+            .bodyToMono(object : ParameterizedTypeReference<HenrikResponseDTO<List<ValorantMatchDTO>>>() {})
+            .map { it.data }
+            .timeout(Duration.ofSeconds(15))
+    }
 }

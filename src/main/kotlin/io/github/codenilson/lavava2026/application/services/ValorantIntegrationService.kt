@@ -56,7 +56,6 @@ class ValorantIntegrationService(
             .onStatus({ status -> status == HttpStatus.NOT_FOUND }, { resp ->
                 Mono.error(ResourceNotFoundException("Matches for player $gameName#$tagName not found"))
             })
-            // TODO: Handle other status codes (404, 500, etc)
             .bodyToMono(object : ParameterizedTypeReference<HenrikResponseDTO<List<ValorantMatchDTO>>>() {})
             .map { it.data }
             .timeout(Duration.ofSeconds(15))

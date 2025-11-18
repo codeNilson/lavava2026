@@ -1,6 +1,7 @@
 package io.github.codenilson.lavava2026.application.services
 
 import io.github.codenilson.lavava2026.application.exceptions.InvalidCredentialsException
+import io.github.codenilson.lavava2026.application.exceptions.ResourceNotFoundException
 import io.github.codenilson.lavava2026.domain.valorant.dto.HenrikResponseDTO
 import io.github.codenilson.lavava2026.domain.valorant.dto.matches.ValorantMatchDTO
 import org.springframework.core.ParameterizedTypeReference
@@ -23,6 +24,9 @@ class ValorantIntegrationService(
             .retrieve()
             .onStatus({ status -> status == HttpStatus.UNAUTHORIZED }, { resp ->
                 Mono.error(InvalidCredentialsException("Unauthorized when calling Riot API"))
+            })
+            .onStatus({ status -> status == HttpStatus.NOT_FOUND }, { resp ->
+                Mono.error(ResourceNotFoundException("Match with id $matchId not found"))
             })
             // TODO: Handle other status codes (404, 500, etc)
             .bodyToMono(object : ParameterizedTypeReference<HenrikResponseDTO<ValorantMatchDTO>>() {})

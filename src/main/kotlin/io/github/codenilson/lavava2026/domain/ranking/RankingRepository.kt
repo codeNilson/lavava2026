@@ -331,4 +331,24 @@ interface RankingRepository : JpaRepository<io.github.codenilson.lavava2026.doma
         nativeQuery = true
     )
     fun getWinRateForPlayer(@Param("playerId") playerId: UUID, @Param("season") season: String): Double?
+
+    @Query(
+        value = """
+            SELECT rk.weapon
+            FROM round_kills rk
+            JOIN rounds r ON rk.round_id = r.id
+            JOIN matches m ON r.match_id = m.id
+            WHERE rk.killer_id = :playerId
+              AND m.season = :season
+              AND rk.weapon IS NOT NULL
+            GROUP BY rk.weapon
+            ORDER BY COUNT(rk.id) DESC
+            LIMIT 1
+        """,
+        nativeQuery = true
+    )
+    fun getPreferredWeapon(
+        @Param("playerId") playerId: UUID,
+        @Param("season") season: String
+    ): String?
 }

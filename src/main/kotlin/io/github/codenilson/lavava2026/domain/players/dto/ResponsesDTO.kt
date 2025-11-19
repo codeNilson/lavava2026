@@ -14,10 +14,12 @@ data class PlayerResponseDTO(
     @field:Schema(example = "2025-10-13T12:34:56") val updatedAt: LocalDateTime,
     @field:Schema(example = "2025-10-01T08:00:00") var createdAt: LocalDateTime,
 
-    // Added season-based stats
+    // Status da Temporada
     @field:Schema(example = "3", description = "Current rank position for the season") val rankPosition: Int? = null,
     @field:Schema(example = "62.5", description = "Win rate (%) for the season") val winRate: Double? = null,
     @field:Schema(example = "27.5", description = "Headshot percentage for the season") val headshotPercentage: Double? = null,
+    @field:Schema(example = "Vandal", description = "Most used weapon in the season")
+    val preferredWeapon: String? = null,
     @field:Schema(example = "4", description = "MVPs in the season") val mvpCount: Long? = null,
     @field:Schema(example = "1", description = "Aces in the season") val aceCount: Long? = null,
     @field:Schema(example = "2", description = "Knife deaths in the season") val knifeDeaths: Long? = null,
@@ -38,6 +40,7 @@ data class PlayerResponseDTO(
         rankPosition: Int?,
         winRate: Double?,
         headshotPercentage: Double?,
+        preferredWeapon: String?,
         mvpCount: Long?,
         aceCount: Long?,
         knifeDeaths: Long?,
@@ -53,6 +56,7 @@ data class PlayerResponseDTO(
         rankPosition = rankPosition,
         winRate = winRate,
         headshotPercentage = headshotPercentage,
+        preferredWeapon = preferredWeapon,
         mvpCount = mvpCount,
         aceCount = aceCount,
         knifeDeaths = knifeDeaths,

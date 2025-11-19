@@ -11,7 +11,6 @@ data class PlayerResponseDTO(
     @field:Schema(example = "BNHA") val tagName: String,
     @field:Schema(example = "10") val competitiveTier: String?,
     @field:Schema(example = "254") val accountLevel: Int,
-    @field:Schema(example = "true") val active: Boolean,
     @field:Schema(example = "2025-10-13T12:34:56") val updatedAt: LocalDateTime,
     @field:Schema(example = "2025-10-01T08:00:00") var createdAt: LocalDateTime,
 
@@ -30,7 +29,6 @@ data class PlayerResponseDTO(
         tagName = player.tagName,
         competitiveTier = player.competitiveTier,
         accountLevel = player.accountLevel,
-        active = player.active,
         updatedAt = player.updatedAt!!,
         createdAt = player.createdAt!!
     )
@@ -50,7 +48,6 @@ data class PlayerResponseDTO(
         tagName = player.tagName,
         competitiveTier = player.competitiveTier,
         accountLevel = player.accountLevel,
-        active = player.active,
         updatedAt = player.updatedAt!!,
         createdAt = player.createdAt!!,
         rankPosition = rankPosition,

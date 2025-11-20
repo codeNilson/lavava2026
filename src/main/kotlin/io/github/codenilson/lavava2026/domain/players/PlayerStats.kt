@@ -25,10 +25,10 @@ class PlayerStats(
     val season: String,
     val winrate: Double,
     val headshotPercentage: Double,
-    val prefferedWeapon: String,
+    val preferredWeapon: String,
     val mvpCount: Int,
     val aceCount: Int,
-    val knife_kills: Int,
+    val knifeKills: Int,
     @ElementCollection
     val versus: MutableList<Versus> = mutableListOf(),
 )

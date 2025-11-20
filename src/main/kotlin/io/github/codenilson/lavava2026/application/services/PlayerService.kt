@@ -54,11 +54,7 @@ class PlayerService(
     private fun enrichWithStats(player: Player, season: String): PlayerResponseDTO {
         val rankPosition = rankingRepository.getRankPosition(player.puuid, season)
         val knifeDeaths = rankingRepository.countKnifeKills(player.puuid, season)
-
-        // --- CHAMADA DO NOVO MÉTODO ---
         val preferredWeapon = rankingRepository.getPreferredWeapon(player.puuid, season)
-        // ------------------------------
-
         val headshotTotals = performanceRepository.getHeadshotTotals(player.puuid, season)
         val headshotPercentage = if (headshotTotals == null || headshotTotals.getTotalShots() == 0L) 0.0 else {
             kotlin.math.round((headshotTotals.getHeadshots().toDouble() / headshotTotals.getTotalShots()) * 10000) / 100.0
@@ -87,7 +83,7 @@ class PlayerService(
             rankPosition = rankPosition,
             winRate = winRate,
             headshotPercentage = headshotPercentage,
-            preferredWeapon = preferredWeapon, // <--- Passando o valor
+            preferredWeapon = preferredWeapon,
             mvpCount = mvpCount,
             aceCount = aceCount,
             knifeDeaths = knifeDeaths,

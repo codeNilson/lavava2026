@@ -1,6 +1,7 @@
 package io.github.codenilson.lavava2026.domain.players
 
 import io.github.codenilson.lavava2026.domain.performances.Performance
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
@@ -37,6 +38,9 @@ class Player(
         var accountLevel: Int,
 
         var active: Boolean = true,
+
+        @OneToMany(mappedBy = "player", cascade = [CascadeType.ALL], orphanRemoval = true)
+        val stats: MutableList<PlayerStats> = mutableListOf(),
 
         @OneToMany(mappedBy = "player")
         val performances: MutableList<Performance> = mutableListOf(),

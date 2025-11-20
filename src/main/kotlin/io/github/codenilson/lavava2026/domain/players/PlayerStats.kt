@@ -6,16 +6,21 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 import java.util.UUID
 
 @Entity
-@Table(name = "player_stats")
+@Table(
+    name = "player_stats",
+    uniqueConstraints = [UniqueConstraint(columnNames = ["player_puuid", "season"])],
+)
 class PlayerStats(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
 
-    @ManyToOne var player: Player,
+    @ManyToOne @JoinColumn(nullable = false) var player: Player,
 
     val season: String,
     val winrate: Double,
@@ -25,7 +30,7 @@ class PlayerStats(
     val aceCount: Int,
     val knife_kills: Int,
     @ElementCollection
-    val versus: List<Versus> = mutableListOf(),
+    val versus: MutableList<Versus> = mutableListOf(),
 )
 
 @Embeddable

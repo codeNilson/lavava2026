@@ -23,6 +23,9 @@ class PlayerStats(
     @ManyToOne @JoinColumn(nullable = false) var player: Player,
 
     val season: String,
+    val matchesPlayed: Int,
+    val matchesWon: Int,
+    val matchesLost: Int,
     val winrate: Double,
     val headshotPercentage: Double,
     val preferredWeapon: String,

@@ -39,8 +39,8 @@ class PlayerStats(
 @Embeddable
 data class Versus(
     val opponentPuuid: UUID,
-    val game_name: String,
-    val tag_name: String,
+    val gameName: String,
+    val tagName: String,
     val kills: Int,
     val deaths: Int,
 )

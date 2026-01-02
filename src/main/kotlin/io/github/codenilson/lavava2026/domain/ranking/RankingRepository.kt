@@ -351,4 +351,39 @@ interface RankingRepository : JpaRepository<io.github.codenilson.lavava2026.doma
         @Param("playerId") playerId: UUID,
         @Param("season") season: String
     ): String?
+
+    @Query(
+        value = """
+            SELECT COUNT(p.match_id)
+            FROM performances p
+            JOIN matches m ON p.match_id = m.id
+            WHERE p.player_id = :playerId AND m.season = :season
+        """,
+        nativeQuery = true
+    )
+    fun getMatchesPlayedForPlayer(@Param("playerId") playerId: UUID, @Param("season") season: String): Long
+
+    @Query(
+        value = """
+            SELECT COUNT(CASE WHEN t.won = TRUE THEN 1 ELSE NULL END)
+            FROM performances p
+            JOIN teams t ON p.team_id = t.id
+            JOIN matches m ON p.match_id = m.id
+            WHERE p.player_id = :playerId AND m.season = :season
+        """,
+        nativeQuery = true
+    )
+    fun getMatchesWonForPlayer(@Param("playerId") playerId: UUID, @Param("season") season: String): Long
+
+    @Query(
+        value = """
+            SELECT COUNT(CASE WHEN t.won = FALSE THEN 1 ELSE NULL END)
+            FROM performances p
+            JOIN teams t ON p.team_id = t.id
+            JOIN matches m ON p.match_id = m.id
+            WHERE p.player_id = :playerId AND m.season = :season
+        """,
+        nativeQuery = true
+    )
+    fun getMatchesLostForPlayer(@Param("playerId") playerId: UUID, @Param("season") season: String): Long
 }

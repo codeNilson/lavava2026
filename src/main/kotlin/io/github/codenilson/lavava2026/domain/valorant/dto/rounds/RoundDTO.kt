@@ -7,7 +7,7 @@ import io.github.codenilson.lavava2026.domain.valorant.dto.players.PlayerRoundSt
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class RoundResultDTO(
     @param:JsonProperty("id") val roundNum: Int,
-    val result: String, //(ex: detonate)
-    val winningTeam: String, //(ex: blue, red)
+    val result: String,
+    val winningTeam: String,
     val stats: List<PlayerRoundStatsDto>,
 )

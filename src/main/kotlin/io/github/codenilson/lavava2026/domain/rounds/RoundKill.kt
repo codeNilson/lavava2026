@@ -20,7 +20,6 @@ class RoundKill(
 
     @ManyToOne @JoinColumn(name = "round_id") var round: Round? = null,
 
-    //TODO: estatistica: quantos vezes o jogador matou e morreu para outro jogador
     @ManyToOne @JoinColumn(name = "killer_id") var killer: Player,
 
     @ManyToOne @JoinColumn(name = "victim_id") var victim: Player,

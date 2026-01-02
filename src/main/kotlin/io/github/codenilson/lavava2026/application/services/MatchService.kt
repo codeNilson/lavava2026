@@ -1,4 +1,3 @@
-// Arquivo: .../services/MatchService.kt
 package io.github.codenilson.lavava2026.application.services
 
 import io.github.codenilson.lavava2026.domain.matches.Match

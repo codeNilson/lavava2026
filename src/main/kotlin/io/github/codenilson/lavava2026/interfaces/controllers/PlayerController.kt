@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
-import jakarta.transaction.Transactional
 import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -34,7 +33,6 @@ class PlayerController(
         ]
     )
     @GetMapping
-    @Transactional
     fun getPlayers(
         @RequestParam(required = false)
         @Parameter(description = "Filter by active status. true for only active, false for only inactive, null for all.")

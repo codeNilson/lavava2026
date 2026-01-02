@@ -57,7 +57,6 @@ data class EconomyDto(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Weapon(
-//    val id: UUID || String,
     val name: String?,
     val type: String,
 )

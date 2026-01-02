@@ -28,7 +28,6 @@ class ValorantIntegrationService(
             .onStatus({ status -> status == HttpStatus.NOT_FOUND }, { resp ->
                 Mono.error(ResourceNotFoundException("Match with id $matchId not found"))
             })
-            // TODO: Handle other status codes (404, 500, etc)
             .bodyToMono(object : ParameterizedTypeReference<HenrikResponseDTO<ValorantMatchDTO>>() {})
             .map { it.data }
             .timeout(Duration.ofSeconds(15))

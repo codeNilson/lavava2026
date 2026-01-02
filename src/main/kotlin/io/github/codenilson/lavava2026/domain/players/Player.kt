@@ -33,8 +33,6 @@ class Player(
         var tagName: String,
 
         var competitiveTier: String,
-        // var playerCard: String? = null,
-        // var playerTitle: String? = null,
         var accountLevel: Int,
 
         var active: Boolean = true,

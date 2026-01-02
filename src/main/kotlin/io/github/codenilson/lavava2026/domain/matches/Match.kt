@@ -34,7 +34,6 @@ class Match(
 
     @OneToMany(mappedBy = "match") val rounds: MutableList<Round> = mutableListOf(),
 
-    // montado a partir de match >>> playerInfo (incluido) >> playerStats (incluido)
     @OneToMany(mappedBy = "match") val performances: MutableList<Performance> = mutableListOf(),
 
     @LastModifiedDate @Column(nullable = false) var updatedAt: LocalDateTime? = null,

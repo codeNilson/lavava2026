@@ -14,7 +14,6 @@ data class PlayerResponseDTO(
     @field:Schema(example = "2025-10-13T12:34:56") val updatedAt: LocalDateTime,
     @field:Schema(example = "2025-10-01T08:00:00") var createdAt: LocalDateTime,
 
-    // Status da Temporada
     @field:Schema(example = "3", description = "Current rank position for the season") val rankPosition: Int? = null,
     @field:Schema(example = "62.5", description = "Win rate (%) for the season") val winRate: Double? = null,
     @field:Schema(example = "27.5", description = "Headshot percentage for the season") val headshotPercentage: Double? = null,

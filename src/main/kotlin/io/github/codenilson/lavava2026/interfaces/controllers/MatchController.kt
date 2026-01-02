@@ -1,4 +1,3 @@
-// Arquivo: .../controllers/MatchController.kt
 package io.github.codenilson.lavava2026.interfaces.controllers
 
 import io.github.codenilson.lavava2026.application.usecases.ListRecentMatchesUseCase

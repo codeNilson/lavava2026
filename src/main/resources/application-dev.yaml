@@ -7,7 +7,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
-
+  liquibase:
+    enabled: false
   h2:
     console:
       path: /h2-console
